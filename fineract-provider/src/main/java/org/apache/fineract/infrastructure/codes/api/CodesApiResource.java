@@ -76,7 +76,7 @@ public class CodesApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Codes", description = "Returns the list of codes.\n" + "\n" + "Example Requests:\n" + "\n" + "codes")
+    @Operation(summary = "Retrieve Codes", tags = {"Codes"}, description = "Returns the list of codes.\n" + "\n" + "Example Requests:\n" + "\n" + "codes")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = CodesApiResourceSwagger.GetCodesResponse.class))))
     public String retrieveCodes(@Context final UriInfo uriInfo) {
 
@@ -91,7 +91,7 @@ public class CodesApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a Code", description = "Creates a code. Codes created through api are always 'user defined' and so system defined is marked as false.")
+    @Operation(summary = "Create a Code", tags = {"Codes"}, description = "Creates a code. Codes created through api are always 'user defined' and so system defined is marked as false.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.PostCodesRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.PostCodesResponse.class)))
     public String createCode(@Parameter(hidden = true) final String apiRequestBodyAsJson) {
@@ -106,7 +106,7 @@ public class CodesApiResource {
     @GET
     @Path("{codeId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a Code", description = "Returns the details of a Code.\n" + "\n" + "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve a Code", tags = {"Codes"}, description = "Returns the details of a Code.\n" + "\n" + "Example Requests:\n" + "\n"
             + "codes/1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.GetCodesResponse.class)))
     public String retrieveCode(@PathParam("codeId") @Parameter(description = "codeId") final Long codeId, @Context final UriInfo uriInfo) {
@@ -120,7 +120,7 @@ public class CodesApiResource {
     @GET
     @Path("name/{codeName}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a Code", description = "Returns the details of a Code.\n" + "\n" + "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve a Code", tags = {"Codes"}, description = "Returns the details of a Code.\n" + "\n" + "Example Requests:\n" + "\n"
             + "codes/1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.GetCodesResponse.class)))
     public String retrieveCodeByName(@PathParam("codeName") @Parameter(description = "codeName") final String codeName,
@@ -136,7 +136,7 @@ public class CodesApiResource {
     @Path("{codeId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Code", description = "Updates the details of a code if it is not system defined.")
+    @Operation(summary = "Update a Code", tags = {"Codes"}, description = "Updates the details of a code if it is not system defined.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.PutCodesRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.PutCodesResponse.class)))
     public String updateCode(@PathParam("codeId") @Parameter(description = "codeId") final Long codeId,
@@ -152,7 +152,7 @@ public class CodesApiResource {
     @DELETE
     @Path("{codeId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a Code", description = "Deletes a code if it is not system defined.")
+    @Operation(summary = "Delete a Code", tags = {"Codes"}, description = "Deletes a code if it is not system defined.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CodesApiResourceSwagger.DeleteCodesResponse.class)))
     public String deleteCode(@PathParam("codeId") @Parameter(description = "codeId") final Long codeId) {
 
