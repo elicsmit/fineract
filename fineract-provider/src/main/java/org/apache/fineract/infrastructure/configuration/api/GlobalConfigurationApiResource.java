@@ -80,7 +80,7 @@ public class GlobalConfigurationApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Global Configuration | Retrieve Global Configuration for surveys", description = "Returns the list global enable/disable configurations.\n"
+    @Operation(summary = "Retrieve Global Configuration | Retrieve Global Configuration for surveys", tags = {"Global Configuration"}, description = "Returns the list global enable/disable configurations.\n"
             + "\n" + "Example Requests:\n" + "\n" + "configurations\n\n" + "\n"
             + "Returns the list global enable/disable survey configurations.\n" + "\n" + "Example Requests:\n" + "\n"
             + "configurations/survey")
@@ -99,7 +99,7 @@ public class GlobalConfigurationApiResource {
     @GET
     @Path("{configId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Global Configuration", operationId = "retrieveOneGlobalConfiguration", description = "Returns a global enable/disable configurations.\n"
+    @Operation(summary = "Retrieve Global Configuration", operationId = "retrieveOneGlobalConfiguration", tags = {"Global Configuration"}, description = "Returns a global enable/disable configurations.\n"
             + "\n" + "Example Requests:\n" + "\n" + "configurations/1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GlobalConfigurationPropertyData.class)))
     public String retrieveOne(@PathParam("configId") @Parameter(description = "configId") final Long configId,
@@ -116,7 +116,7 @@ public class GlobalConfigurationApiResource {
     @GET
     @Path("name/{name}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Global Configuration", description = "Returns a global enable/disable configuration.\n" + "\n"
+    @Operation(summary = "Retrieve Global Configuration", tags = {"Global Configuration"}, description = "Returns a global enable/disable configuration.\n" + "\n"
             + "Example Requests:\n" + "\n" + "configurations/name/enable-address")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GlobalConfigurationPropertyData.class)))
     public String retrieveOneByName(@PathParam("name") @Parameter(description = "name") final String name, @Context final UriInfo uriInfo) {
@@ -133,7 +133,7 @@ public class GlobalConfigurationApiResource {
     @Path("{configId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Global Configuration", operationId = "updateGlobalConfiguration", description = "Updates an enable/disable global configuration item.")
+    @Operation(summary = "Update Global Configuration", operationId = "updateGlobalConfiguration", tags = {"Global Configuration"}, description = "Updates an enable/disable global configuration item.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = GlobalConfigurationApiResourceSwagger.PutGlobalConfigurationsRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GlobalConfigurationApiResourceSwagger.PutGlobalConfigurationsResponse.class)))
     public String updateConfiguration(@PathParam("configId") @Parameter(description = "configId") final Long configId,
@@ -153,7 +153,7 @@ public class GlobalConfigurationApiResource {
     @Path("/name/{configName}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Global Configuration by name", description = "Updates an enable/disable global configuration item by name")
+    @Operation(summary = "Update Global Configuration by name", tags = {"Global Configuration"}, description = "Updates an enable/disable global configuration item by name")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = GlobalConfigurationApiResourceSwagger.PutGlobalConfigurationsRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GlobalConfigurationApiResourceSwagger.PutGlobalConfigurationsResponse.class)))
     public String updateConfigurationByName(@PathParam("configName") @Parameter(description = "configName") final String configName,
