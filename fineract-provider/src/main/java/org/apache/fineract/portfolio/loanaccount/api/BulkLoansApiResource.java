@@ -80,6 +80,7 @@ public class BulkLoansApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Loan Reassignment Template", tags = {"Bulk Loans"}, description = "Returns a template for bulk loan reassignment")
     public String loanReassignmentTemplate(@QueryParam(OFFICE_ID) final Long officeId,
             @QueryParam(FROM_LOAN_OFFICER_ID) final Long loanOfficerId, @Context final UriInfo uriInfo) {
 
@@ -108,6 +109,7 @@ public class BulkLoansApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Bulk Loan Reassignment", tags = {"Bulk Loans"}, description = "Assigns loan officers in bulk to loans")
     public String loanReassignment(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().assignLoanOfficersInBulk().withJson(apiRequestBodyAsJson).build();
