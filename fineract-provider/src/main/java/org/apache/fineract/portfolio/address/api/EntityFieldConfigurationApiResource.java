@@ -47,7 +47,7 @@ public class EntityFieldConfigurationApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieves the Entity Field Configuration", description = "It retrieves all the Entity Field Configuration")
+    @Operation(summary = "Retrieves the Entity Field Configuration", tags = {"Entity Field Configuration"}, description = "It retrieves all the Entity Field Configuration")
     public List<FieldConfigurationData> getAddresses(@PathParam("entity") @Parameter(description = "entity") final String entityname) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
         return this.readPlatformServicefld.retrieveFieldConfiguration(entityname);
