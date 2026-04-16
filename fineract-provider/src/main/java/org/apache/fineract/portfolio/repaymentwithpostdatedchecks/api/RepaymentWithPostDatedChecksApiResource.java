@@ -63,7 +63,7 @@ public class RepaymentWithPostDatedChecksApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get All Post Dated Checks", description = "Get All Post dated Checks")
+    @Operation(summary = "Get All Post Dated Checks", tags = {"repayment with post dated checks"}, description = "Get All Post dated Checks")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDatedChecksApiResourceSwagger.GetPostDatedChecks.class)))) })
     public String getPostDatedChecks(@PathParam("loanId") @Parameter(description = "loanId") final Long loanId) {
@@ -76,7 +76,7 @@ public class RepaymentWithPostDatedChecksApiResource {
     @GET
     @Path("{installmentId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get Post Dated Check", description = "Get Post Dated Check")
+    @Operation(summary = "Get Post Dated Check", tags = {"repayment with post dated checks"}, description = "Get Post Dated Check")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDatedChecksApiResourceSwagger.GetPostDatedChecks.class)))) })
     public String getPostDatedCheck(@PathParam("installmentId") @Parameter(description = "installmentId") final Integer installmentId,
@@ -91,7 +91,7 @@ public class RepaymentWithPostDatedChecksApiResource {
     @Path("{postDatedCheckId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Post Dated Check, Bounced Check", description = "Update Post Dated Check, Bounced Check")
+    @Operation(summary = "Update Post Dated Check, Bounced Check", tags = {"repayment with post dated checks"}, description = "Update Post Dated Check, Bounced Check")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = PostDatedChecksApiResourceSwagger.UpdatePostDatedCheckRequest.class)))
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDatedChecksApiResourceSwagger.UpdatePostDatedCheckResponse.class)))) })
@@ -116,7 +116,7 @@ public class RepaymentWithPostDatedChecksApiResource {
     @DELETE
     @Path("{postDatedCheckId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete Post Dated Check", description = "Delete Post Dated Check")
+    @Operation(summary = "Delete Post Dated Check", tags = {"repayment with post dated checks"}, description = "Delete Post Dated Check")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDatedChecksApiResourceSwagger.DeletePostDatedCheck.class)))) })
     public String deletePostDatedCheck(@PathParam("postDatedCheckId") @Parameter(description = "postDatedCheckId") final Long id,
