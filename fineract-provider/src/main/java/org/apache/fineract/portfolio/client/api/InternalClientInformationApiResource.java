@@ -51,6 +51,7 @@ import org.springframework.stereotype.Component;
 @Path("/v1/internal/client")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Internal Client Information", description = "Internal client resources for testing")
 public class InternalClientInformationApiResource implements InitializingBean {
 
     private final ClientRepositoryWrapper clientRepositoryWrapper;
@@ -73,7 +74,7 @@ public class InternalClientInformationApiResource implements InitializingBean {
     @GET
     @Path("{clientId}/audit")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get internal client audit fields", operationId = "getInternalClientAuditFields")
+    @Operation(summary = "Get internal client audit fields", tags = {"Internal Client Information"}, operationId = "getInternalClientAuditFields")
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
     public String getClientAuditFields(@Context final UriInfo uriInfo, @PathParam("clientId") Long clientId) {
         log.warn("------------------------------------------------------------");
