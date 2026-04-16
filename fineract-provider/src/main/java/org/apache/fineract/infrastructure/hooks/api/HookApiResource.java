@@ -68,7 +68,7 @@ public class HookApiResource {
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
 
     @GET
-    @Operation(summary = "Retrieve Hooks", description = "Returns the list of hooks.\n" + "\n" + "Example Requests:\n" + "\n" + "hooks")
+    @Operation(summary = "Retrieve Hooks", tags = {"Hooks"}, description = "Returns the list of hooks.\n" + "\n" + "Example Requests:\n" + "\n" + "hooks")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = HookApiResourceSwagger.GetHookResponse.class))))
     public String retrieveHooks(@Context final UriInfo uriInfo) {
 
@@ -82,7 +82,7 @@ public class HookApiResource {
 
     @GET
     @Path("{hookId}")
-    @Operation(summary = "Retrieve a Hook", description = "Returns the details of a Hook.\n" + "\n" + "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve a Hook", tags = {"Hooks"}, description = "Returns the details of a Hook.\n" + "\n" + "Example Requests:\n" + "\n"
             + "hooks/1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = HookApiResourceSwagger.GetHookResponse.class)))
     public String retrieveHook(@PathParam("hookId") @Parameter(description = "hookId") final Long hookId, @Context final UriInfo uriInfo) {
@@ -102,7 +102,7 @@ public class HookApiResource {
 
     @GET
     @Path("template")
-    @Operation(summary = "Retrieve Hooks Template", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
+    @Operation(summary = "Retrieve Hooks Template", tags = {"Hooks"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
             + "\n" + "Field Defaults\n" + "Allowed description Lists\n" + "Example Request:\n" + "\n" + "hooks/template")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = HookApiResourceSwagger.GetHookTemplateResponse.class)))
     public String template(@Context final UriInfo uriInfo) {
@@ -117,7 +117,7 @@ public class HookApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a Hook", description = "The following parameters can be passed for the creation of a hook :-\n" + "\n"
+    @Operation(summary = "Create a Hook", tags = {"Hooks"}, description = "The following parameters can be passed for the creation of a hook :-\n" + "\n"
             + "name - string - Required. The name of the template that is being called. (See /hooks/template for the list of valid hook names.)\n"
             + "\n" + "isActive - boolean - Determines whether the hook is actually triggered.\n" + "\n"
             + "events - array - Determines what events the hook is triggered for.\n" + "\n"
@@ -137,7 +137,7 @@ public class HookApiResource {
     @PUT
     @Path("{hookId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Hook", description = "Updates the details of a hook.")
+    @Operation(summary = "Update a Hook", tags = {"Hooks"}, description = "Updates the details of a hook.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = HookApiResourceSwagger.PutHookRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = HookApiResourceSwagger.PutHookResponse.class)))
     public String updateHook(@PathParam("hookId") @Parameter(description = "hookId") final Long hookId,
@@ -152,7 +152,7 @@ public class HookApiResource {
 
     @DELETE
     @Path("{hookId}")
-    @Operation(summary = "Delete a Hook", description = "Deletes a hook.")
+    @Operation(summary = "Delete a Hook", tags = {"Hooks"}, description = "Deletes a hook.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = HookApiResourceSwagger.DeleteHookResponse.class)))
     public String deleteHook(@PathParam("hookId") @Parameter(description = "hookId") final Long hookId) {
 
