@@ -55,7 +55,7 @@ public class DepositAccountOnHoldFundTransactionsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve deposit account on hold fund transactions", operationId = "retrieveAllDepositAccountOnHoldFundTransactions")
+    @Operation(summary = "Retrieve deposit account on hold fund transactions", tags = {"Deposit Account On Hold Fund Transactions"}, operationId = "retrieveAllDepositAccountOnHoldFundTransactions")
     public String retrieveAll(@PathParam("savingsId") final Long savingsId, @QueryParam("guarantorFundingId") final Long guarantorFundingId,
             @Context final UriInfo uriInfo, @QueryParam("offset") final Integer offset, @QueryParam("limit") final Integer limit,
             @QueryParam("orderBy") final String orderBy, @QueryParam("sortOrder") final String sortOrder) {
