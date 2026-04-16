@@ -66,7 +66,7 @@ public class CollateralManagementApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a new collateral", description = "Collateral Creation")
+    @Operation(summary = "Create a new collateral", tags = {"Collateral Management"}, description = "Collateral Creation")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = CollateralManagementProductRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CollateralManagementApiResourceSwagger.PostCollateralManagementProductResponse.class)))
     public CommandProcessingResult createCollateral(
@@ -79,7 +79,7 @@ public class CollateralManagementApiResource {
     @GET
     @Path("{collateralId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get Collateral", description = "Fetch Collateral")
+    @Operation(summary = "Get Collateral", tags = {"Collateral Management"}, description = "Fetch Collateral")
     public CollateralManagementData getCollateral(
             @PathParam("collateralId") @Parameter(description = "collateralId") final Long collateralId) {
 
@@ -91,7 +91,7 @@ public class CollateralManagementApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get All Collaterals", description = "Fetch all Collateral Products")
+    @Operation(summary = "Get All Collaterals", tags = {"Collateral Management"}, description = "Fetch all Collateral Products")
     public List<CollateralManagementData> getAllCollaterals() {
         this.context.authenticatedUser()
                 .validateHasReadPermission(CollateralManagementJsonInputParams.COLLATERAL_PRODUCT_READ_PERMISSION.getValue());
@@ -101,7 +101,7 @@ public class CollateralManagementApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Get Collateral Template", description = "Get Collateral Template")
+    @Operation(summary = "Get Collateral Template", tags = {"Collateral Management"}, description = "Get Collateral Template")
     public List<CurrencyData> getCollateralTemplate() {
         return currencyReadPlatformService.retrieveAllPlatformCurrencies();
     }
@@ -110,7 +110,7 @@ public class CollateralManagementApiResource {
     @Path("{collateralId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Collateral", description = "Update Collateral")
+    @Operation(summary = "Update Collateral", tags = {"Collateral Management"}, description = "Update Collateral")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = CollateralProductRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CollateralManagementApiResourceSwagger.PutCollateralProductResponse.class)))
     public CommandProcessingResult updateCollateral(
@@ -125,7 +125,7 @@ public class CollateralManagementApiResource {
     @DELETE
     @Path("{collateralId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a Collateral", description = "Delete Collateral")
+    @Operation(summary = "Delete a Collateral", tags = {"Collateral Management"}, description = "Delete Collateral")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = CollateralManagementApiResourceSwagger.DeleteCollateralProductResponse.class)))
     public CommandProcessingResult deleteCollateral(
             @PathParam("collateralId") @Parameter(description = "collateralId") final Long collateralId) {
