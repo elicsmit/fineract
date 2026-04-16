@@ -81,7 +81,7 @@ public class ClientChargesApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Client Charges", operationId = "retrieveAllClientCharges", description = "The list capability of client charges supports pagination."
+    @Operation(summary = "List Client Charges", operationId = "retrieveAllClientCharges", tags = {"Client Charges"}, description = "The list capability of client charges supports pagination."
             + "Example Requests:\n" + "clients/1/charges\n" + "\nclients/1/charges?offset=0&limit=5")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ClientChargesApiResourceSwagger.GetClientsClientIdChargesResponse.class)))
     public String retrieveAllClientCharges(@PathParam("clientId") @Parameter(description = "clientId") final Long clientId,
@@ -113,7 +113,7 @@ public class ClientChargesApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve client charge template", operationId = "retrieveTemplateClientCharge")
+    @Operation(summary = "Retrieve client charge template", tags = {"Client Charges"}, operationId = "retrieveTemplateClientCharge")
     public String retrieveTemplate(@Context final UriInfo uriInfo,
             @PathParam("clientId") @Parameter(description = "clientId") final Long clientId) {
 
@@ -130,7 +130,7 @@ public class ClientChargesApiResource {
     @GET
     @Path("{chargeId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a Client Charge", operationId = "retrieveOneClientCharge", description = "Example Requests:\n"
+    @Operation(summary = "Retrieve a Client Charge", operationId = "retrieveOneClientCharge", tags = {"Client Charges"}, description = "Example Requests:\n"
             + "clients/1/charges/1\n" + "\n" + "\n" + "clients/1/charges/1?fields=name,id")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ClientChargesApiResourceSwagger.GetClientsClientIdChargesResponse.GetClientsChargesPageItems.class)))
     public String retrieveClientCharge(@PathParam("clientId") @Parameter(description = "clientId") final Long clientId,
@@ -160,7 +160,7 @@ public class ClientChargesApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Add Client Charge", operationId = "createClientCharge", description = " This API associates a Client charge with an implicit Client account\n"
+    @Operation(summary = "Add Client Charge", operationId = "createClientCharge", tags = {"Client Charges"}, description = " This API associates a Client charge with an implicit Client account\n"
             + "Mandatory Fields : \n" + "chargeId and dueDate  \n" + "Optional Fields : \n" + "amount")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = ClientChargesApiResourceSwagger.PostClientsClientIdChargesRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ClientChargesApiResourceSwagger.PostClientsClientIdChargesResponse.class)))
@@ -179,7 +179,7 @@ public class ClientChargesApiResource {
     @Path("{chargeId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Pay a Client Charge | Waive a Client Charge", operationId = "payOrWaiveClientCharge", description = "Pay a Client Charge:\n\n"
+    @Operation(summary = "Pay a Client Charge | Waive a Client Charge", operationId = "payOrWaiveClientCharge", tags = {"Client Charges"}, description = "Pay a Client Charge:\n\n"
             + "Mandatory Fields:" + "transactionDate and amount " + ""
             + "\"Pay either a part of or the entire due amount for a charge.(command=paycharge)\n" + "\n" + "Waive a Client Charge:\n"
             + "\n" + "\n" + "This API provides the facility of waiving off the remaining amount on a client charge (command=waive)\n\n"
@@ -223,7 +223,7 @@ public class ClientChargesApiResource {
     @DELETE
     @Path("{chargeId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a Client Charge", operationId = "deleteClientCharge", description = "Deletes a Client Charge on which no transactions have taken place (either payments or waivers). ")
+    @Operation(summary = "Delete a Client Charge", operationId = "deleteClientCharge", tags = {"Client Charges"}, description = "Deletes a Client Charge on which no transactions have taken place (either payments or waivers). ")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ClientChargesApiResourceSwagger.DeleteClientsClientIdChargesChargeIdResponse.class)))
     public String deleteClientCharge(@PathParam("clientId") @Parameter(description = "clientId") final Long clientId,
             @PathParam("chargeId") @Parameter(description = "chargeId") final Long chargeId) {
