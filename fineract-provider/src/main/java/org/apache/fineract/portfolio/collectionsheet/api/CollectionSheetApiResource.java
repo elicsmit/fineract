@@ -65,7 +65,7 @@ public class CollectionSheetApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Generate Individual Collection Sheet | Save Collection Sheet", description = "Generate Individual Collection Sheet:\n\n"
+    @Operation(summary = "Generate Individual Collection Sheet | Save Collection Sheet", tags = {"Collection Sheet"}, description = "Generate Individual Collection Sheet:\n\n"
             + "This Api retrieves repayment details of all individual loans under a office as on a specified meeting date.\n\n"
             + "Save Collection Sheet:\n\n"
             + "This Api allows the loan officer to perform bulk repayments of individual loans and deposit of mandatory savings on a given meeting date.")
