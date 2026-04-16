@@ -67,7 +67,7 @@ public class SchedulerApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Scheduler Status", description = "Returns the scheduler status.\n" + "\n" + "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve Scheduler Status", tags = {"Scheduler"}, description = "Returns the scheduler status.\n" + "\n" + "Example Requests:\n" + "\n"
             + "scheduler")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SchedulerApiResourceSwagger.GetSchedulerResponse.class)))
     public String retrieveStatus(@Context final UriInfo uriInfo) {
@@ -82,7 +82,7 @@ public class SchedulerApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Activate Scheduler Jobs | Suspend Scheduler Jobs", description = "Activates the scheduler job service. | Suspends the scheduler job service.")
+    @Operation(summary = "Activate Scheduler Jobs | Suspend Scheduler Jobs", tags = {"Scheduler"}, description = "Activates the scheduler job service. | Suspends the scheduler job service.")
     @ApiResponse(responseCode = "200", description = "POST :  scheduler?command=start\n\n" + "\n" + "POST : scheduler?command=stop")
     public Response changeSchedulerStatus(
             @QueryParam(SchedulerJobApiConstants.COMMAND) @Parameter(description = "command") final String commandParam) {
