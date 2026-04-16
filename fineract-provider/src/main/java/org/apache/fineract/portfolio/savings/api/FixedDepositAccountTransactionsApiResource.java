@@ -84,7 +84,7 @@ public class FixedDepositAccountTransactionsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Fixed Deposit Account Transaction Template", operationId = "retrieveTemplateFixedDepositAccountTransaction")
+    @Operation(summary = "Retrieve Fixed Deposit Account Transaction Template", tags = {"Fixed Deposit Account Transactions"}, operationId = "retrieveTemplateFixedDepositAccountTransaction")
     public String retrieveTemplate(@PathParam("fixedDepositAccountId") final Long fixedDepositAccountId,
             // @QueryParam("command") final String commandParam,
             @Context final UriInfo uriInfo) {
@@ -105,7 +105,7 @@ public class FixedDepositAccountTransactionsApiResource {
     @GET
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List fixed deposit account transactions", operationId = "retrieveAllFixedDepositAccountTransactions")
+    @Operation(summary = "List fixed deposit account transactions", tags = {"Fixed Deposit Account Transactions"}, operationId = "retrieveAllFixedDepositAccountTransactions")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = FixedDepositAccountTransactionsApiResourceSwagger.GetFixedDepositAccountsAccountIdTransactionsResponse.class)))) })
     public String retrieveAll(@PathParam("fixedDepositAccountId") final Long fixedDepositAccountId, @Context final UriInfo uriInfo) {
@@ -119,7 +119,7 @@ public class FixedDepositAccountTransactionsApiResource {
     @GET
     @Path("{transactionId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a fixed deposit account transaction", operationId = "retrieveOneFixedDepositAccountTransaction")
+    @Operation(summary = "Retrieve a fixed deposit account transaction", tags = {"Fixed Deposit Account Transactions"}, operationId = "retrieveOneFixedDepositAccountTransaction")
     public String retrieveOne(@PathParam("fixedDepositAccountId") final Long fixedDepositAccountId,
             @PathParam("transactionId") final Long transactionId, @Context final UriInfo uriInfo) {
 
@@ -138,6 +138,7 @@ public class FixedDepositAccountTransactionsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Fixed Deposit Account Transactions", tags = {"Fixed Deposit Account Transactions"}, description = "Executes transactions on a fixed deposit account (deposit, withdrawal, interest posting)")
     public String transaction(@PathParam("fixedDepositAccountId") final Long fixedDepositAccountId,
             @QueryParam("command") final String commandParam, final String apiRequestBodyAsJson) {
 
@@ -165,7 +166,7 @@ public class FixedDepositAccountTransactionsApiResource {
     @Path("{transactionId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Adjust Transaction | Undo transaction", description = "Adjust Transaction:\n\nThis command modifies the given transaction.\n\n"
+    @Operation(summary = "Adjust Transaction | Undo transaction", tags = {"Fixed Deposit Account Transactions"}, description = "Adjust Transaction:\n\nThis command modifies the given transaction.\n\n"
             + "Undo transaction:\n\nThis command reverses the given transaction.\n\n" + "Showing request/response for 'Adjust Transaction'")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = FixedDepositAccountTransactionsApiResourceSwagger.PostFixedDepositAccountsFixedDepositAccountIdTransactionsRequest.class)))
     @ApiResponses({
