@@ -69,7 +69,7 @@ public class SurveyApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve surveys", description = "Retrieve surveys. This allows to retrieve the list of survey tables registered .")
+    @Operation(summary = "Retrieve surveys", tags = {"Survey"}, description = "Retrieve surveys. This allows to retrieve the list of survey tables registered .")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SurveyApiResourceSwagger.GetSurveyResponse.class))))
     public String retrieveSurveys() {
 
@@ -82,7 +82,7 @@ public class SurveyApiResource {
     @GET
     @Path("{surveyName}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve survey", description = "Lists a registered survey table details and the Apache Fineract Core application table they are registered to.")
+    @Operation(summary = "Retrieve survey", tags = {"Survey"}, description = "Lists a registered survey table details and the Apache Fineract Core application table they are registered to.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SurveyApiResourceSwagger.GetSurveyResponse.class)))
     public String retrieveSurvey(@PathParam("surveyName") @Parameter(description = "surveyName") final String surveyName) {
 
@@ -98,7 +98,7 @@ public class SurveyApiResource {
     @Path("{surveyName}/{apptableId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create an entry in the survey table", description = "Insert and entry in a survey table (full fill the survey)."
+    @Operation(summary = "Create an entry in the survey table", tags = {"Survey"}, description = "Insert and entry in a survey table (full fill the survey)."
             + "\n" + "\n" + "Refer Link for sample Body:  [ https://fineract.apache.org/docs/legacy/#survey_create ] ")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = SurveyApiResourceSwagger.PostSurveySurveyNameApptableIdRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SurveyApiResourceSwagger.PostSurveySurveyNameApptableIdResponse.class)))
@@ -119,6 +119,7 @@ public class SurveyApiResource {
     @GET
     @Path("{surveyName}/{clientId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Client Survey Overview", tags = {"Survey"}, description = "")
     public String getClientSurveyOverview(@PathParam("surveyName") final String surveyName, @PathParam("clientId") final Long clientId) {
 
         this.context.authenticatedUser().validateHasReadPermission(SurveyApiConstants.SURVEY_RESOURCE_NAME);
@@ -131,6 +132,7 @@ public class SurveyApiResource {
     @GET
     @Path("{surveyName}/{clientId}/{entryId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Survey Entry", tags = {"Survey"}, description = "")
     public String getSurveyEntry(@PathParam("surveyName") final String surveyName, @PathParam("clientId") final Long clientId,
             @PathParam("entryId") final Long entryId) {
 
@@ -146,6 +148,7 @@ public class SurveyApiResource {
     @Path("register/{surveyName}/{apptable}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Register a Survey", tags = {"Survey"}, description = "Registers a new survey for a data table")
     public String register(@PathParam("surveyName") final String datatable, @PathParam("apptable") final String apptable,
             final String apiRequestBodyAsJson) {
 
@@ -161,6 +164,7 @@ public class SurveyApiResource {
     @DELETE
     @Path("{surveyName}/{clientId}/{fulfilledId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Delete Survey Entries", tags = {"Survey"}, description = "Deletes specific survey entries from the data table")
     public String deleteDatatableEntries(@PathParam("surveyName") final String surveyName, @PathParam("clientId") final Long clientId,
             @PathParam("fulfilledId") final Long fulfilledId) {
 
