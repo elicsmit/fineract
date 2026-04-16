@@ -65,7 +65,7 @@ public class RateApiResource {
     @GET
     @Path("{rateId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a rate", operationId = "retrieveOneRate")
+    @Operation(summary = "Retrieve a rate", tags = {"Rate"}, operationId = "retrieveOneRate")
     public RateData retrieveRate(@PathParam("rateId") Long rateId) {
 
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
@@ -76,7 +76,7 @@ public class RateApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a rate", operationId = "createRate")
+    @Operation(summary = "Create a rate", tags = {"Rate"}, operationId = "createRate")
     public CommandProcessingResult createRate(final RateRequest rateRequest) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createRate().withJson(toApiJsonSerializer.serialize(rateRequest))
                 .build();
@@ -86,7 +86,7 @@ public class RateApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List all rates", operationId = "retrieveAllRates")
+    @Operation(summary = "List all rates", tags = {"Rate"}, operationId = "retrieveAllRates")
     public List<RateData> getAllRates() {
 
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
@@ -98,7 +98,7 @@ public class RateApiResource {
     @Path("{rateId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a rate", operationId = "updateRate")
+    @Operation(summary = "Update a rate", tags = {"Rate"}, operationId = "updateRate")
     public CommandProcessingResult updateRate(@PathParam("rateId") Long rateId, final RateRequest rateRequest) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateRate(rateId)
                 .withJson(toApiJsonSerializer.serialize(rateRequest)).build();
