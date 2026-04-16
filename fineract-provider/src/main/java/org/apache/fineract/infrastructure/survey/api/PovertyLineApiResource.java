@@ -46,6 +46,7 @@ public class PovertyLineApiResource {
     @GET
     @Path("{ppiName}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve All Poverty Lines", tags = {"Poverty Line"}, description = "")
     public String retrieveAll(@PathParam("ppiName") final String ppiName) {
 
         this.context.authenticatedUser().validateHasReadPermission(PovertyLineApiConstants.POVERTY_LINE_RESOURCE_NAME);
@@ -58,6 +59,7 @@ public class PovertyLineApiResource {
     @GET
     @Path("{ppiName}/{likelihoodId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve a Poverty Line", tags = {"Poverty Line"}, description = "")
     public String retrieveAll(@PathParam("ppiName") final String ppiName, @PathParam("likelihoodId") final Long likelihoodId) {
 
         this.context.authenticatedUser().validateHasReadPermission(PovertyLineApiConstants.POVERTY_LINE_RESOURCE_NAME);
