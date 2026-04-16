@@ -89,7 +89,7 @@ public class SchedulerJobApiResource {
     private final SqlValidator sqlValidator;
 
     @GET
-    @Operation(summary = "Retrieve Scheduler Jobs", operationId = "retrieveAllSchedulerJobs", description = "Returns the list of jobs.\n"
+    @Operation(summary = "Retrieve Scheduler Jobs", operationId = "retrieveAllSchedulerJobs", tags = {"SCHEDULER JOB"}, description = "Returns the list of jobs.\n"
             + "\n" + "Example Requests:\n" + "\n" + "jobs")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.GetJobsResponse.class))))
     public String retrieveAll(@Context final UriInfo uriInfo) {
@@ -101,7 +101,7 @@ public class SchedulerJobApiResource {
 
     @GET
     @Path("{" + SchedulerJobApiConstants.JOB_ID + "}")
-    @Operation(summary = "Retrieve a Job", operationId = "retrieveOneSchedulerJob", description = "Returns the details of a Job.\n" + "\n"
+    @Operation(summary = "Retrieve a Job", operationId = "retrieveOneSchedulerJob", tags = {"SCHEDULER JOB"}, description = "Returns the details of a Job.\n" + "\n"
             + "Example Requests:\n" + "\n" + "jobs/5")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.GetJobsResponse.class)))
     public String retrieveOne(@PathParam(SchedulerJobApiConstants.JOB_ID) @Parameter(description = "jobId") final Long jobId,
@@ -111,7 +111,7 @@ public class SchedulerJobApiResource {
 
     @GET
     @Path(SHORT_NAME_PARAM + "/{shortName}")
-    @Operation(summary = "Retrieve a Job", description = "Returns the details of a Job bu shortName.\n" + "\n" + "Example Requests:\n"
+    @Operation(summary = "Retrieve a Job", tags = {"SCHEDULER JOB"}, description = "Returns the details of a Job bu shortName.\n" + "\n" + "Example Requests:\n"
             + "\n" + "jobs/short-name/SA_PINT")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.GetJobsResponse.class)))
     public String retrieveByShortName(
@@ -122,7 +122,7 @@ public class SchedulerJobApiResource {
 
     @GET
     @Path("{" + SchedulerJobApiConstants.JOB_ID + "}/" + SchedulerJobApiConstants.JOB_RUN_HISTORY)
-    @Operation(summary = "Retrieve Job Run History", description = "Example Requests:\n" + "\n" + "jobs/5/runhistory?offset=0&limit=200")
+    @Operation(summary = "Retrieve Job Run History", tags = {"SCHEDULER JOB"}, description = "Example Requests:\n" + "\n" + "jobs/5/runhistory?offset=0&limit=200")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.GetJobsJobIDJobRunHistoryResponse.class)))
     public String retrieveHistory(@Context final UriInfo uriInfo,
             @PathParam(SchedulerJobApiConstants.JOB_ID) @Parameter(description = "jobId") final Long jobId,
@@ -135,7 +135,7 @@ public class SchedulerJobApiResource {
 
     @GET
     @Path(SHORT_NAME_PARAM + "/{shortName}/" + SchedulerJobApiConstants.JOB_RUN_HISTORY)
-    @Operation(summary = "Retrieve Job Run History", description = "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve Job Run History", tags = {"SCHEDULER JOB"}, description = "Example Requests:\n" + "\n"
             + "jobs/short-name/SA_PINT/runhistory?offset=0&limit=200")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.GetJobsJobIDJobRunHistoryResponse.class)))
     public String retrieveHistoryByShortName(@Context final UriInfo uriInfo,
@@ -150,7 +150,7 @@ public class SchedulerJobApiResource {
     @POST
     @Path("{" + SchedulerJobApiConstants.JOB_ID + "}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Run a Job", description = "Manually Execute Specific Job.")
+    @Operation(summary = "Run a Job", tags = {"SCHEDULER JOB"}, description = "Manually Execute Specific Job.")
     @RequestBody(content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.ExecuteJobRequest.class)))
     @ApiResponse(responseCode = "200", description = "POST: jobs/1?command=executeJob")
     public Response executeJob(@PathParam(SchedulerJobApiConstants.JOB_ID) @Parameter(description = "jobId") final Long jobId,
@@ -162,7 +162,7 @@ public class SchedulerJobApiResource {
     @POST
     @Path(SHORT_NAME_PARAM + "/{shortName}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Run a Job", description = "Manually Execute Specific Job.")
+    @Operation(summary = "Run a Job", tags = {"SCHEDULER JOB"}, description = "Manually Execute Specific Job.")
     @RequestBody(content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.ExecuteJobRequest.class)))
     @ApiResponse(responseCode = "200", description = "POST: jobs/short-name/SA_PINT?command=executeJob")
     public Response executeJobByShortName(
@@ -175,7 +175,7 @@ public class SchedulerJobApiResource {
     @PUT
     @Path("{" + SchedulerJobApiConstants.JOB_ID + "}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Job", description = "Updates the details of a job.")
+    @Operation(summary = "Update a Job", tags = {"SCHEDULER JOB"}, description = "Updates the details of a job.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.PutJobsJobIDRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK")
     public String updateJobDetail(@PathParam(SchedulerJobApiConstants.JOB_ID) @Parameter(description = "jobId") final Long jobId,
@@ -186,7 +186,7 @@ public class SchedulerJobApiResource {
     @PUT
     @Path(SHORT_NAME_PARAM + "/{shortName}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Job", description = "Updates the details of a job.")
+    @Operation(summary = "Update a Job", tags = {"SCHEDULER JOB"}, description = "Updates the details of a job.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = SchedulerJobApiResourceSwagger.PutJobsJobIDRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK")
     public String updateJobDetailByShortName(
