@@ -64,13 +64,13 @@ public class InterestRateChartSlabsApiResource {
 
     @GET
     @Path("template")
-    @Operation(summary = "Retrieve Chart Slab Template", operationId = "retrieveTemplateInterestRateChartSlab")
+    @Operation(summary = "Retrieve Chart Slab Template", tags = {"Interest Rate Slab (A.K.A interest bands)"}, operationId = "retrieveTemplateInterestRateChartSlab")
     public InterestRateChartSlabData template(@PathParam("chartId") final Long chartId) {
         return interestRateChartSlabsReadService.retrieveTemplate();
     }
 
     @GET
-    @Operation(summary = "Retrieve all Slabs", operationId = "retrieveAllInterestRateChartSlabs", description = "Retrieve list of slabs associated with a chart\n"
+    @Operation(summary = "Retrieve all Slabs", operationId = "retrieveAllInterestRateChartSlabs", tags = {"Interest Rate Slab (A.K.A interest bands)"}, description = "Retrieve list of slabs associated with a chart\n"
             + "\n" + "Example Requests:\n" + "\n" + "interestratecharts/1/chartslabs")
     public List<InterestRateChartSlabData> retrieveAll(@PathParam("chartId") final Long chartId) {
         return interestRateChartSlabsReadService.retrieveAll(chartId);
@@ -78,7 +78,7 @@ public class InterestRateChartSlabsApiResource {
 
     @GET
     @Path("{chartSlabId}")
-    @Operation(summary = "Retrieve a Slab", operationId = "retrieveOneInterestRateChartSlab", description = """
+    @Operation(summary = "Retrieve a Slab", operationId = "retrieveOneInterestRateChartSlab", tags = {"Interest Rate Slab (A.K.A interest bands)"}, description = """
             Retrieve a slab associated with an Interest rate chart
 
             Example Requests:
@@ -92,7 +92,7 @@ public class InterestRateChartSlabsApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a Slab", operationId = "createInterestRateChartSlab", description = """
+    @Operation(summary = "Create a Slab", operationId = "createInterestRateChartSlab", tags = {"Interest Rate Slab (A.K.A interest bands)"}, description = """
             Creates a new interest rate slab for an interest rate chart.
 
             Mandatory Fields:
@@ -123,7 +123,7 @@ public class InterestRateChartSlabsApiResource {
     @PUT
     @Path("{chartSlabId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Slab", operationId = "updateInterestRateChartSlab", description = "It updates the Slab from chart")
+    @Operation(summary = "Update a Slab", operationId = "updateInterestRateChartSlab", tags = {"Interest Rate Slab (A.K.A interest bands)"}, description = "It updates the Slab from chart")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InterestRateChartSlabsUpdateResponse.class)))
     public InterestRateChartSlabsUpdateResponse update(@PathParam("chartId") final Long chartId,
             @PathParam("chartSlabId") final Long chartSlabId, final InterestRateChartSlabsUpdateRequest request) {
@@ -140,7 +140,7 @@ public class InterestRateChartSlabsApiResource {
 
     @DELETE
     @Path("{chartSlabId}")
-    @Operation(summary = "Delete a Slab", operationId = "deleteInterestRateChartSlab", description = "Delete a Slab from a chart")
+    @Operation(summary = "Delete a Slab", operationId = "deleteInterestRateChartSlab", tags = {"Interest Rate Slab (A.K.A interest bands)"}, description = "Delete a Slab from a chart")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InterestRateChartSlabsDeleteResponse.class)))
     public InterestRateChartSlabsDeleteResponse delete(@PathParam("chartId") final Long chartId,
             @PathParam("chartSlabId") final Long chartSlabId) {
