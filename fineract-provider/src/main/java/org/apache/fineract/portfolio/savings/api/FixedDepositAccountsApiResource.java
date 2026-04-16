@@ -110,7 +110,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Fixed Deposit Account Template", operationId = "retrieveTemplateFixedDepositAccount", description = """
+    @Operation(summary = "Retrieve Fixed Deposit Account Template", tags = {"Fixed Deposit Account"}, operationId = "retrieveTemplateFixedDepositAccount", description = """
             This is a convenience resource. It can be useful when building maintenance user interface screens for fixed deposit applications. The template data returned consists of any or all of:
 
 
@@ -140,7 +140,7 @@ public class FixedDepositAccountsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Fixed deposit applications/accounts", operationId = "retrieveAllFixedDepositAccounts", description = """
+    @Operation(summary = "List Fixed deposit applications/accounts", operationId = "retrieveAllFixedDepositAccounts", tags = {"Fixed Deposit Account"}, description = """
             Lists Fixed Deposit Accounts
 
             Example Requests:
@@ -182,7 +182,7 @@ public class FixedDepositAccountsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Submit new fixed deposit application", description = """
+    @Operation(summary = "Submit new fixed deposit application", tags = {"Fixed Deposit Account"}, description = """
             Submits a new fixed deposit application
             Mandatory Fields: clientId or groupId, productId, submittedOnDate, depositAmount, depositPeriod, depositPeriodFrequencyId
 
@@ -202,7 +202,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("{accountId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a fixed deposit application/account", operationId = "retrieveOneFixedDepositAccount", description = """
+    @Operation(summary = "Retrieve a fixed deposit application/account", operationId = "retrieveOneFixedDepositAccount", tags = {"Fixed Deposit Account"}, description = """
             Retrieves a fixed deposit application/account
 
             Example Requests :
@@ -240,6 +240,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("calculate-fd-interest")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Calculate Fixed Deposit Interest", tags = {"Fixed Deposit Account"}, description = "Calculates interest for a fixed deposit account based on provided parameters")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FixedDepositAccountsApiResourceSwagger.CalculateFixedDepositInterestResponse.class)))
     public String calculateFixedDepositInterest(@Context final UriInfo uriInfo,
             @QueryParam("principalAmount") @Parameter(description = "BigDecimal principalAmount") final BigDecimal principalAmount,
@@ -337,7 +338,7 @@ public class FixedDepositAccountsApiResource {
     @Path("{accountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Modify a fixed deposit application", operationId = "updateFixedDepositAccount", description = "Fixed deposit application can only be modified when in 'Submitted and pending approval' state. Once the application is approved, the details cannot be changed using this method. Specific api endpoints will be created to allow change of interest detail such as rate, compounding period, posting period etc")
+    @Operation(summary = "Modify a fixed deposit application", operationId = "updateFixedDepositAccount", tags = {"Fixed Deposit Account"}, description = "Fixed deposit application can only be modified when in 'Submitted and pending approval' state. Once the application is approved, the details cannot be changed using this method. Specific api endpoints will be created to allow change of interest detail such as rate, compounding period, posting period etc")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = FixedDepositAccountsApiResourceSwagger.PutFixedDepositAccountsAccountIdRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FixedDepositAccountsApiResourceSwagger.PutFixedDepositAccountsAccountIdResponse.class)))
     public String update(@PathParam("accountId") @Parameter(description = "accountId") final Long accountId,
@@ -355,7 +356,7 @@ public class FixedDepositAccountsApiResource {
     @Path("{accountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Approve fixed deposit application | Undo approval fixed deposit application | Reject fixed deposit application | Withdraw fixed deposit application | Activate a fixed deposit account | Close a fixed deposit account | Premature Close a fixed deposit account | Calculate Premature amount on Fixed deposit account | Calculate Interest on Fixed Deposit Account | Post Interest on Fixed Deposit Account", description = "Approve fixed deposit application:\n\n"
+    @Operation(tags = {"Fixed Deposit Account"}, summary = "Approve fixed deposit application | Undo approval fixed deposit application | Reject fixed deposit application | Withdraw fixed deposit application | Activate a fixed deposit account | Close a fixed deposit account | Premature Close a fixed deposit account | Calculate Premature amount on Fixed deposit account | Calculate Interest on Fixed Deposit Account | Post Interest on Fixed Deposit Account", description = "Approve fixed deposit application:\n\n"
             + "Approves fixed deposit application so long as its in 'Submitted and pending approval' state.\n\n"
             + "Undo approval fixed deposit application:\n\n"
             + "Will move 'approved' fixed deposit application back to 'Submitted and pending approval' state.\n\n"
@@ -441,7 +442,7 @@ public class FixedDepositAccountsApiResource {
     @DELETE
     @Path("{accountId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a fixed deposit application", operationId = "deleteFixedDepositAccount", description = "At present we support hard delete of fixed deposit application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the fixed deposit account.")
+    @Operation(summary = "Delete a fixed deposit application", operationId = "deleteFixedDepositAccount", tags = {"Fixed Deposit Account"}, description = "At present we support hard delete of fixed deposit application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the fixed deposit account.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FixedDepositAccountsApiResourceSwagger.DeleteFixedDepositAccountsAccountIdResponse.class)))
     public String delete(@PathParam("accountId") @Parameter(description = "accountId") final Long accountId) {
 
@@ -455,6 +456,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("{accountId}/template")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Fixed Deposit Account Closure Template", tags = {"Fixed Deposit Account"}, description = "Returns a template for closing a fixed deposit account")
     public String accountClosureTemplate(@PathParam("accountId") @Parameter(description = "accountId") final Long accountId,
             @QueryParam("command") @Parameter(description = "command") final String commandParam, @Context final UriInfo uriInfo) {
 
@@ -471,6 +473,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("downloadtemplate")
     @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download Fixed Deposit Account Template", tags = {"Fixed Deposit Account"}, description = "Returns a template for bulk fixed deposit account import in Excel format")
     public Response getFixedDepositTemplate(@QueryParam("officeId") final Long officeId, @QueryParam("staffId") final Long staffId,
             @QueryParam("dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.FIXED_DEPOSIT_ACCOUNTS.toString(), officeId, staffId,
@@ -480,6 +483,7 @@ public class FixedDepositAccountsApiResource {
     @POST
     @Path("uploadtemplate")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Operation(summary = "Upload Fixed Deposit Account Template", tags = {"Fixed Deposit Account"}, description = "Uploads a fixed deposit account template for processing")
     @RequestBody(description = "Upload fixed deposit template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = UploadRequest.class)) })
     public String postFixedDepositTemplate(@FormDataParam("file") InputStream uploadedInputStream,
@@ -493,6 +497,7 @@ public class FixedDepositAccountsApiResource {
     @GET
     @Path("transaction/downloadtemplate")
     @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download Fixed Deposit Transaction Template", tags = {"Fixed Deposit Account"}, description = "Returns a template for bulk fixed deposit transaction import in Excel format")
     public Response getFixedDepositTransactionTemplate(@QueryParam("officeId") final Long officeId,
             @QueryParam("dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.FIXED_DEPOSIT_TRANSACTIONS.toString(), officeId, null,
@@ -502,6 +507,7 @@ public class FixedDepositAccountsApiResource {
     @POST
     @Path("transaction/uploadtemplate")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Operation(summary = "Upload Fixed Deposit Transaction Template", tags = {"Fixed Deposit Account"}, description = "Uploads a fixed deposit transaction template for processing")
     @RequestBody(description = "Upload fixed deposit transaction template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = UploadRequest.class)) })
     public String postFixedDepositTransactionTemplate(@FormDataParam("file") InputStream uploadedInputStream,
