@@ -76,6 +76,7 @@ public class CreditBureauConfigurationApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "List Credit Bureau Configuration", tags = {"Credit Bureau Configuration"}, description = "")
     public String getCreditBureau(@Context final UriInfo uriInfo) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
 
@@ -89,6 +90,7 @@ public class CreditBureauConfigurationApiResource {
     @GET
     @Path("/mappings")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Credit Bureau Loan Product Mappings", tags = {"Credit Bureau Integration"}, description = "")
     public String getCreditBureauLoanProductMapping(@Context final UriInfo uriInfo) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
 
@@ -104,6 +106,7 @@ public class CreditBureauConfigurationApiResource {
     @GET
     @Path("/organisationCreditBureau")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Organisation Credit Bureau details", tags = {"Credit Bureau Integration"}, description = "")
     public String getOrganisationCreditBureau(@Context final UriInfo uriInfo) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
 
@@ -118,6 +121,7 @@ public class CreditBureauConfigurationApiResource {
     @GET
     @Path("/config/{organisationCreditBureauId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Credit Bureau Configuration", tags = {"Credit Bureau Integration"}, description = "")
     public String getConfiguration(@PathParam("organisationCreditBureauId") final Long organisationCreditBureauId,
             @Context final UriInfo uriInfo) {
 
@@ -132,6 +136,7 @@ public class CreditBureauConfigurationApiResource {
     @GET
     @Path("/loanProduct")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Loan Products from Credit Bureau", tags = {"Credit Bureau Integration"}, description = "")
     public String fetchLoanProducts(@Context final UriInfo uriInfo) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
 
@@ -146,6 +151,7 @@ public class CreditBureauConfigurationApiResource {
     @GET
     @Path("/loanProduct/{loanProductId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Credit Bureau Loan Product Mapping", tags = {"Credit Bureau Integration"}, description = "")
     public String fetchMappingByLoanProductId(@Context final UriInfo uriInfo, @PathParam("loanProductId") final Long loanProductId) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
 
@@ -161,6 +167,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/organisationCreditBureau")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update Credit Bureau Configuration", tags = {"Credit Bureau Integration"}, description = "")
     public String updateCreditBureau(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateCreditBureau().withJson(apiRequestBodyAsJson).build();
@@ -174,6 +181,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/mappings")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update Credit Bureau Loan Product Mapping", tags = {"Credit Bureau Integration"}, description = "")
     public String updateCreditBureauLoanProductMapping(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateCreditBureauLoanProductMapping()
@@ -188,6 +196,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/organisationCreditBureau/{organisationCreditBureauId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Add Organisation Credit Bureau", tags = {"Credit Bureau Integration"}, description = "")
     public String addOrganisationCreditBureau(@PathParam("organisationCreditBureauId") final Long organisationCreditBureauId,
             final String apiRequestBodyAsJson) {
 
@@ -203,6 +212,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/mappings/{organisationCreditBureauId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Create Credit Bureau Loan Product Mapping", tags = {"Credit Bureau Integration"}, description = "")
     public String createCreditBureauLoanProductMapping(@PathParam("organisationCreditBureauId") final Long organisationCreditBureauId,
             final String apiRequestBodyAsJson) {
 
@@ -218,6 +228,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/configuration/{creditBureauId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Create Credit Bureau Configuration", tags = {"Credit Bureau Integration"}, description = "")
     public String createCreditBureauConfiguration(@PathParam("creditBureauId") final Long creditBureauId,
             final String apiRequestBodyAsJson) {
 
@@ -233,6 +244,7 @@ public class CreditBureauConfigurationApiResource {
     @Path("/configuration/{configurationId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update Credit Bureau Configuration", tags = {"Credit Bureau Configuration"}, description = "")
     public String updateCreditBureauConfiguration(@PathParam("configurationId") final Long configurationId,
             final String apiRequestBodyAsJson) {
 
