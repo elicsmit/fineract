@@ -46,7 +46,7 @@ public class ClientSearchV2ApiResource implements ClientSearchV2Api {
     @Path("search")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Search Clients by text", operationId = "searchClientsByText")
+    @Operation(summary = "Search Clients by text", tags = {"ClientSearchV2"}, operationId = "searchClientsByText")
     public Page<ClientSearchData> searchByText(@Parameter PagedRequest<ClientTextSearch> request) {
         return delegate.searchByText(request);
     }
