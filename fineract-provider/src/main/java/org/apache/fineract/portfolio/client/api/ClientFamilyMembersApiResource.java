@@ -59,7 +59,7 @@ public class ClientFamilyMembersApiResource {
     @GET
     @Path("/{familyMemberId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a client family member", operationId = "retrieveOneClientFamilyMember")
+    @Operation(summary = "Retrieve a client family member", tags = {"Client Family Member"}, operationId = "retrieveOneClientFamilyMember")
     public ClientFamilyMembersData getFamilyMember(@PathParam("familyMemberId") final Long familyMemberId,
             @PathParam("clientId") @Parameter(description = "clientId") final Long clientId) {
 
@@ -70,7 +70,7 @@ public class ClientFamilyMembersApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List all client family members", operationId = "retrieveAllClientFamilyMembers")
+    @Operation(summary = "List all client family members", tags = {"Client Family Member"}, operationId = "retrieveAllClientFamilyMembers")
     public List<ClientFamilyMembersData> getFamilyMembers(@PathParam("clientId") final long clientId) {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
         return this.readPlatformService.getClientFamilyMembers(clientId);
@@ -89,7 +89,7 @@ public class ClientFamilyMembersApiResource {
     @Path("/{familyMemberId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a client family member", operationId = "updateClientFamilyMember")
+    @Operation(summary = "Update a client family member", tags = {"Client Family Member"}, operationId = "updateClientFamilyMember")
     public CommandProcessingResult updateClientFamilyMembers(@PathParam("familyMemberId") final long familyMemberId,
             ClientFamilyMemberRequest clientFamilyMemberRequest,
             @PathParam("clientId") @Parameter(description = "clientId") final Long clientId) {
@@ -102,7 +102,7 @@ public class ClientFamilyMembersApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Add a client family member", operationId = "createClientFamilyMember")
+    @Operation(summary = "Add a client family member", tags = {"Client Family Member"}, operationId = "createClientFamilyMember")
     public CommandProcessingResult addClientFamilyMembers(@PathParam("clientId") final long clientid,
             ClientFamilyMemberRequest clientFamilyMemberRequest) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().addFamilyMembers(clientid)
@@ -114,7 +114,7 @@ public class ClientFamilyMembersApiResource {
     @DELETE
     @Path("/{familyMemberId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a client family member", operationId = "deleteClientFamilyMember")
+    @Operation(summary = "Delete a client family member", tags = {"Client Family Member"}, operationId = "deleteClientFamilyMember")
     public CommandProcessingResult deleteClientFamilyMembers(@PathParam("familyMemberId") final long familyMemberId,
             @PathParam("clientId") @Parameter(description = "clientId") final Long clientId) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteFamilyMembers(familyMemberId).build();
