@@ -42,6 +42,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+@Tag(name = "Internal Loan Information", description = "Internal loan resources for testing")
 @Profile(FineractProfiles.TEST)
 @Component
 @Path("/v1/internal/loan")
@@ -71,6 +72,7 @@ public class InternalLoanInformationApiResource implements InitializingBean {
     @Path("{loanId}/audit")
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Retrieve Loan Audit Fields", tags = {"Internal Loan Information"}, description = "Returns audit details for a specific loan")
     public AuditData getLoanAuditFields(@Context final UriInfo uriInfo, @PathParam("loanId") Long loanId) {
         log.warn("------------------------------------------------------------");
         log.warn("                                                            ");
@@ -87,6 +89,7 @@ public class InternalLoanInformationApiResource implements InitializingBean {
     @Path("{loanId}/transaction/{transactionId}/audit")
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Retrieve Loan Transaction Audit Fields", tags = {"Internal Loan Information"}, description = "Returns audit details for a specific loan transaction")
     public AuditData getLoanTransactionAuditFields(@Context final UriInfo uriInfo, @PathParam("loanId") Long loanId,
             @PathParam("transactionId") Long transactionId) {
         log.warn("------------------------------------------------------------");
@@ -104,6 +107,7 @@ public class InternalLoanInformationApiResource implements InitializingBean {
     @Path("status/{statusId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Retrieve Loans by Status", tags = {"Internal Loan Information"}, description = "Returns a list of loan IDs based on the provided status")
     public List<Long> getLoansByStatus(@Context final UriInfo uriInfo, @PathParam("statusId") Integer statusId) {
         log.warn("------------------------------------------------------------");
         log.warn("                                                            ");
@@ -118,6 +122,7 @@ public class InternalLoanInformationApiResource implements InitializingBean {
     @Path("{loanId}/advanced-payment-allocation-rules")
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Retrieve Advanced Payment Allocation Rules", tags = {"Internal Loan Information"}, description = "Returns advanced payment allocation rules for a specific loan")
     public List<AdvancedPaymentData> getAdvancedPaymentAllocationRulesOfLoan(@Context final UriInfo uriInfo,
             @PathParam("loanId") Long loanId) {
         log.warn("------------------------------------------------------------");
