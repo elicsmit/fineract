@@ -62,7 +62,7 @@ public class NotesApiResource {
     private final CommandDispatcher dispatcher;
 
     @GET
-    @Operation(summary = "Retrieve a Resource's description", description = """
+    @Operation(summary = "Retrieve a Resource's description", tags = {"Notes"}, description = """
             Retrieves a resource's notes
 
             Note: results are returned in descending createOn order.
@@ -85,7 +85,7 @@ public class NotesApiResource {
 
     @GET
     @Path("{noteId}")
-    @Operation(summary = "Retrieve a Resource Note", description = """
+    @Operation(summary = "Retrieve a Resource Note", tags = {"Notes"}, description = """
             Retrieves a resource Note
 
             Example Requests:
@@ -108,7 +108,7 @@ public class NotesApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Add a Resource Note", description = """
+    @Operation(summary = "Add a Resource Note", tags = {"Notes"}, description = """
             Adds a new note to a supported resource.
 
             Example Requests:
@@ -139,7 +139,7 @@ public class NotesApiResource {
     @PUT
     @Path("{noteId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Resource Note", description = """
+    @Operation(summary = "Update a Resource Note", tags = {"Notes"}, description = """
             Updates a Resource Note
             """)
     public NoteUpdateResponse updateNote(@PathParam("resourceType") final String resourceType,
@@ -166,7 +166,7 @@ public class NotesApiResource {
 
     @DELETE
     @Path("{noteId}")
-    @Operation(summary = "Delete a Resource Note", description = """
+    @Operation(summary = "Delete a Resource Note", tags = {"Notes"}, description = """
             Deletes a Resource Note
             """)
     public NoteDeleteResponse deleteNote(@PathParam("resourceType") final String resourceType,
