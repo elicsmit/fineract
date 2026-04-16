@@ -69,6 +69,7 @@ public class LoanDisbursementDetailApiResource {
     @Path("{disbursementId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update Loan Disbursement Details", tags = {"Loan Disbursement Details"}, description = "Updates the loan disbursement details")
     public CommandProcessingResult updateDisbursementDate(@PathParam("loanId") final Long loanId,
             @PathParam("disbursementId") final Long disbursementId, final String apiRequestBodyAsJson) {
 
@@ -83,6 +84,7 @@ public class LoanDisbursementDetailApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = LoanDisbursementDetailApiResourceSwagger.PostAddAndDeleteDisbursementDetailRequest.class)))
+    @Operation(summary = "Add and Delete Disbursement Details", tags = {"Loan Disbursement Details"}, description = "Adds or deletes disbursement details for a loan")
     public CommandProcessingResult addAndDeleteDisbursementDetail(@PathParam("loanId") final Long loanId,
             @Parameter(hidden = true) final String apiRequestBodyAsJson) {
 
@@ -95,6 +97,7 @@ public class LoanDisbursementDetailApiResource {
     @GET
     @Path("{disbursementId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Disbursement Details", tags = {"Loan Disbursement Details"}, description = "Returns a specific disbursement detail for a loan")
     public String retriveDetail(@PathParam("loanId") final Long loanId, @PathParam("disbursementId") final Long disbursementId,
             @Context final UriInfo uriInfo) {
 
