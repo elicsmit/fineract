@@ -38,10 +38,13 @@ import org.apache.fineract.infrastructure.core.service.ThreadLocalContextUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @Profile(FineractProfiles.TEST)
 @Component
 @Path("/v1/internal/configurations")
+@Tag(name = "Internal Configurations", description = "Internal configuration resources for testing")
 @RequiredArgsConstructor
 @Slf4j
 public class InternalConfigurationsApiResource implements InitializingBean {
@@ -66,7 +69,7 @@ public class InternalConfigurationsApiResource implements InitializingBean {
     @Path("name/{configName}/value/{configValue}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update internal global configuration", operationId = "updateInternalGlobalConfiguration")
+    @Operation(summary = "Update internal global configuration", operationId = "updateInternalGlobalConfiguration", tags = {"Internal Configurations"})
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
     public Response updateGlobalConfiguration(@PathParam("configName") String configName, @PathParam("configValue") Long configValue) {
         log.warn("------------------------------------------------------------");
