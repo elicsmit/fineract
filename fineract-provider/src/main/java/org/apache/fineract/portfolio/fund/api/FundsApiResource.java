@@ -70,7 +70,7 @@ public class FundsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Funds", description = "Returns the list of funds.\n" + "\n" + "Example Requests:\n" + "\n" + "funds")
+    @Operation(summary = "Retrieve Funds", tags = {"Funds"}, description = "Returns the list of funds.\n" + "\n" + "Example Requests:\n" + "\n" + "funds")
     public List<FundData> retrieveFunds() {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
         return readPlatformService.retrieveAllFunds();
@@ -79,7 +79,7 @@ public class FundsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a Fund", description = "Creates a Fund")
+    @Operation(summary = "Create a Fund", tags = {"Funds"}, description = "Creates a Fund")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = FundRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FundsApiResourceSwagger.PostFundsResponse.class)))
     public CommandProcessingResult createFund(@Parameter(hidden = true) final FundRequest fundRequest) {
@@ -91,7 +91,7 @@ public class FundsApiResource {
     @GET
     @Path("{fundId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a Fund", description = "Returns the details of a Fund.\n" + "\n" + "Example Requests:\n" + "\n"
+    @Operation(summary = "Retrieve a Fund", tags = {"Funds"}, description = "Returns the details of a Fund.\n" + "\n" + "Example Requests:\n" + "\n"
             + "funds/1")
     public FundData retrieveFund(@PathParam("fundId") @Parameter(description = "fundId") final Long fundId) {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
@@ -102,7 +102,7 @@ public class FundsApiResource {
     @Path("{fundId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Fund", description = "Updates the details of a fund.")
+    @Operation(summary = "Update a Fund", tags = {"Funds"}, description = "Updates the details of a fund.")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = FundRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FundsApiResourceSwagger.PutFundsFundIdResponse.class)))
     public String updateFund(@PathParam("fundId") @Parameter(description = "fundId") final Long fundId,
