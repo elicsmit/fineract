@@ -63,7 +63,7 @@ public class ClientAddressApiResource {
     @GET
     @Path("addresses/template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve client address template", operationId = "retrieveTemplateClientAddress")
+    @Operation(summary = "Retrieve client address template", tags = {"Clients Address"}, operationId = "retrieveTemplateClientAddress")
     public AddressData getAddressesTemplate() {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
         return readPlatformService.retrieveTemplate();
@@ -74,7 +74,7 @@ public class ClientAddressApiResource {
     @Path("/{clientid}/addresses")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create an address for a Client", operationId = "createClientAddress", description = "Mandatory Fields : \n"
+    @Operation(summary = "Create an address for a Client", operationId = "createClientAddress", tags = {"Clients Address"}, description = "Mandatory Fields : \n"
             + "type and clientId")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = ClientAddressRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ClientAddressApiResourcesSwagger.PostClientClientIdAddressesResponse.class)))
@@ -90,7 +90,7 @@ public class ClientAddressApiResource {
     @GET
     @Path("/{clientid}/addresses")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List all addresses for a Client", operationId = "retrieveAllClientAddresses", description = """
+    @Operation(summary = "List all addresses for a Client", operationId = "retrieveAllClientAddresses", tags = {"Clients Address"}, description = """
             Example Requests:
 
             client/1/addresses
@@ -108,7 +108,7 @@ public class ClientAddressApiResource {
     @Path("/{clientid}/addresses")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update an address for a Client", operationId = "updateClientAddress", description = """
+    @Operation(summary = "Update an address for a Client", operationId = "updateClientAddress", tags = {"Clients Address"}, description = """
             All the address fields can be updated by using update client address API
 
             Mandatory Fields
