@@ -42,7 +42,7 @@ public class GroupsLevelApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve All Group Levels", operationId = "retrieveAllGroupLevels")
+    @Operation(summary = "Retrieve All Group Levels", tags = {"Groups Level"}, operationId = "retrieveAllGroupLevels")
     public List<GroupLevelData> retrieveAllGroups() {
 
         this.context.authenticatedUser().validateHasReadPermission("GROUP");
