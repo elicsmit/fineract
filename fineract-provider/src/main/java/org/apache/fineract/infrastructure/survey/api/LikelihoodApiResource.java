@@ -55,6 +55,7 @@ public class LikelihoodApiResource {
     @GET
     @Path("{ppiName}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve Likelihood", tags = {"Likelihood"}, description = "")
     public String retrieveAll(@PathParam("ppiName") final String ppiName) {
 
         this.context.authenticatedUser().validateHasReadPermission(PovertyLineApiConstants.POVERTY_LINE_RESOURCE_NAME);
@@ -67,6 +68,7 @@ public class LikelihoodApiResource {
     @GET
     @Path("{ppiName}/{likelihoodId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve a Likelihood", tags = {"Likelihood"}, description = "")
     public String retrieve(@PathParam("likelihoodId") final Long likelihoodId, @PathParam("ppiName") final String ppiName) {
 
         this.context.authenticatedUser().validateHasReadPermission(PovertyLineApiConstants.POVERTY_LINE_RESOURCE_NAME);
@@ -80,6 +82,7 @@ public class LikelihoodApiResource {
     @Path("{ppiName}/{likelihoodId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update a Likelihood", tags = {"Likelihood"}, description = "")
     public String update(@PathParam("likelihoodId") final Long likelihoodId, final String apiRequestBodyAsJson,
             @PathParam("ppiName") final String ppiName) {
 
