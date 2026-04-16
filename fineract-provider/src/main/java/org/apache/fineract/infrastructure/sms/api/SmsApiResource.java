@@ -68,7 +68,7 @@ public class SmsApiResource {
     private final DefaultToApiJsonSerializer<String> apiJsonSerializer;
 
     @GET
-    @Operation(summary = "List all SMS messages", operationId = "retrieveAllSms")
+    @Operation(summary = "List all SMS messages", operationId = "retrieveAllSms", tags = {"SMS"})
     public List<SmsData> retrieveAll() {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
         return readPlatformService.retrieveAll();
@@ -76,7 +76,7 @@ public class SmsApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a SMS message", operationId = "createSms")
+    @Operation(summary = "Create a SMS message", operationId = "createSms", tags = {"SMS"})
     public CommandProcessingResult create(final SmsCreationRequest smsCreationRequest) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createSms()
                 .withJson(apiJsonSerializer.serialize(smsCreationRequest)).build();
@@ -85,14 +85,14 @@ public class SmsApiResource {
 
     @GET
     @Path("{resourceId}")
-    @Operation(summary = "Retrieve a SMS message", operationId = "retrieveOneSms")
+    @Operation(summary = "Retrieve a SMS message", operationId = "retrieveOneSms", tags = {"SMS"})
     public SmsData retrieveOne(@PathParam("resourceId") final Long resourceId) {
         return readPlatformService.retrieveOne(resourceId);
     }
 
     @GET
     @Path("{campaignId}/messageByStatus")
-    @Operation(summary = "Retrieve SMS messages by status", operationId = "retrieveAllSmsByStatus")
+    @Operation(summary = "Retrieve SMS messages by status", operationId = "retrieveAllSmsByStatus", tags = {"SMS"})
     public Page<SmsData> retrieveAllSmsByStatus(@PathParam("campaignId") final Long campaignId,
             @BeanParam SmsRequestParam smsRequestParam) {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
@@ -113,7 +113,7 @@ public class SmsApiResource {
     @PUT
     @Path("{resourceId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a SMS message", operationId = "updateSms")
+    @Operation(summary = "Update a SMS message", operationId = "updateSms", tags = {"SMS"})
     public CommandProcessingResult update(@PathParam("resourceId") final Long resourceId, final SmsUpdateRequest smsUpdateRequest) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateSms(resourceId)
                 .withJson(apiJsonSerializer.serialize(smsUpdateRequest)).build();
@@ -122,7 +122,7 @@ public class SmsApiResource {
 
     @DELETE
     @Path("{resourceId}")
-    @Operation(summary = "Delete a SMS message", operationId = "deleteSms")
+    @Operation(summary = "Delete a SMS message", operationId = "deleteSms", tags = {"SMS"})
     public CommandProcessingResult delete(@PathParam("resourceId") final Long resourceId) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteSms(resourceId).build();
         return commandsSourceWritePlatformService.logCommandSource(commandRequest);
