@@ -51,6 +51,7 @@ public class ProvisioningCategoryApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve all Provisioning Categories", description = "Returns a list of all defined provisioning categories.", tags = {"Provisioning Category"})
     public List<ProvisioningCategoryData> retrieveAll() {
         platformSecurityContext.authenticatedUser();
         return provisioningCategoryReadPlatformService.retrieveAllProvisionCategories();
@@ -59,6 +60,7 @@ public class ProvisioningCategoryApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Create a Provisioning Category", description = "Creates a new provisioning category for asset classification.", tags = {"Provisioning Category"})
     public CommandProcessingResult createProvisioningCategory(final String apiRequestBodyAsJson) {
         platformSecurityContext.authenticatedUser();
         CommandWrapper commandWrapper = new CommandWrapperBuilder().createProvisioningCategory().withJson(apiRequestBodyAsJson).build();
@@ -69,6 +71,7 @@ public class ProvisioningCategoryApiResource {
     @Path("{categoryId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update a Provisioning Category", description = "Updates the details of an existing provisioning category.", tags = {"Provisioning Category"})
     public CommandProcessingResult updateProvisioningCategory(@PathParam("categoryId") final Long categoryId,
             final String apiRequestBodyAsJson) {
         platformSecurityContext.authenticatedUser();
@@ -80,6 +83,7 @@ public class ProvisioningCategoryApiResource {
     @DELETE
     @Path("{categoryId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Delete a Provisioning Category", description = "Deletes a specific provisioning category by its ID.", tags = {"Provisioning Category"})
     public CommandProcessingResult deleteProvisioningCategory(@PathParam("categoryId") final Long categoryId) {
         platformSecurityContext.authenticatedUser();
         final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteProvisioningCategory(categoryId).build();
