@@ -62,7 +62,7 @@ public class AuditsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Audits", description = "Get a 200 list of audits that match the criteria supplied and sorted by audit id in descending order, and are within the requestors' data scope. Also it supports pagination and sorting\n"
+    @Operation(summary = "List Audits", tags = {"Audits"}, description = "Get a 200 list of audits that match the criteria supplied and sorted by audit id in descending order, and are within the requestors' data scope. Also it supports pagination and sorting\n"
             + "\n" + "Example Requests:\n" + "\n" + "audits\n" + "\n" + "audits?fields=madeOnDate,maker,processingResult\n" + "\n"
             + "audits?makerDateTimeFrom=2013-03-25 08:00:00&makerDateTimeTo=2013-04-04 18:00:00\n" + "\n" + "audits?officeId=1\n" + "\n"
             + "audits?officeId=1&includeJson=true")
@@ -87,7 +87,7 @@ public class AuditsApiResource {
     @GET
     @Path("{auditId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve an Audit Entry", description = "Example Requests:\n" + "\n" + "audits/20\n"
+    @Operation(summary = "Retrieve an Audit Entry", tags = {"Audits"}, description = "Example Requests:\n" + "\n" + "audits/20\n"
             + "audits/20?fields=madeOnDate,maker,processingResult")
     public AuditData retrieveAuditEntry(@PathParam("auditId") @Parameter final Long auditId) {
         context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
@@ -98,7 +98,7 @@ public class AuditsApiResource {
     @GET
     @Path("/searchtemplate")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Audit Search Template", description = "This is a convenience resource. It can be useful when building an Audit Search UI. \"appUsers\" are data scoped to the office/branch the requestor is associated with.\n"
+    @Operation(summary = "Audit Search Template", tags = {"Audits"}, description = "This is a convenience resource. It can be useful when building an Audit Search UI. \"appUsers\" are data scoped to the office/branch the requestor is associated with.\n"
             + "\n" + "Example Requests:\n" + "\n" + "audits/searchtemplate\n" + "audits/searchtemplate?fields=actionNames")
     public AuditSearchData retrieveAuditSearchTemplate() {
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSIONS);
