@@ -60,7 +60,7 @@ public class LookupTableApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
-    @Operation(summary = "List all Lookup Table entries", description = "List all Lookup Table entries for a survey.")
+    @Operation(summary = "List all Lookup Table entries", tags = {"SPM API - LookUp Table"}, description = "List all Lookup Table entries for a survey.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LookupTableData.class))))
     public List<LookupTableData> fetchLookupTables(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId) {
         this.securityContext.authenticatedUser();
@@ -80,7 +80,7 @@ public class LookupTableApiResource {
     @Path("/{key}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
-    @Operation(summary = "Retrieve a Lookup Table entry", description = "Retrieve a Lookup Table entry for a survey.")
+    @Operation(summary = "Retrieve a Lookup Table entry", tags = {"SPM API - LookUp Table"}, description = "Retrieve a Lookup Table entry for a survey.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = LookupTableData.class)))
     public LookupTableData findLookupTable(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId,
             @PathParam("key") @Parameter(description = "Enter key") final String key) {
@@ -101,7 +101,7 @@ public class LookupTableApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
-    @Operation(summary = "Create a Lookup Table entry", description = "Add a new entry to a survey.\n" + "\n" + "Mandatory Fields\n"
+    @Operation(summary = "Create a Lookup Table entry", tags = {"SPM API - LookUp Table"}, description = "Add a new entry to a survey.\n" + "\n" + "Mandatory Fields\n"
             + "key, score, validFrom, validTo")
     @ApiResponse(responseCode = "200", description = "OK")
     public void createLookupTable(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId,
