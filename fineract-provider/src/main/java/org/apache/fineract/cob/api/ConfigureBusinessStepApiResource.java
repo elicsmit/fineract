@@ -59,7 +59,7 @@ public class ConfigureBusinessStepApiResource {
     @GET
     @Path("/names")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Business Jobs", description = "Returns the configured Business Jobs")
+    @Operation(summary = "List Business Jobs", tags = {"Business Step Configuration"}, description = "Returns the configured Business Jobs")
     public ConfiguredJobNamesDTO retrieveAllConfiguredBusinessJobs() {
         List<String> businessJobNames = configJobParameterService.getAllConfiguredJobNames();
         return new ConfiguredJobNamesDTO(businessJobNames);
@@ -68,7 +68,7 @@ public class ConfigureBusinessStepApiResource {
     @GET
     @Path("{jobName}/steps")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Business Step Configurations for a Job", description = "Returns the configured Business Steps for a job")
+    @Operation(summary = "List Business Step Configurations for a Job", tags = {"Business Step Configuration"}, description = "Returns the configured Business Steps for a job")
     public JobBusinessStepConfigData retrieveAllConfiguredBusinessStep(
             @PathParam("jobName") @Parameter(description = "jobName") final String jobName) {
         return configJobParameterService.getBusinessStepConfigByJobName(jobName);
@@ -78,7 +78,7 @@ public class ConfigureBusinessStepApiResource {
     @Path("{jobName}/steps")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Business Step Configurations for a Job", description = "Updates the Business steps execution order for a job")
+    @Operation(summary = "List Business Step Configurations for a Job", tags = {"Business Step Configuration"}, description = "Updates the Business steps execution order for a job")
     @RequestBody(content = @Content(schema = @Schema(implementation = BusinessStepRequest.class)))
     @ApiResponse(responseCode = "204", description = "NO_CONTENT")
     public Response updateJobBusinessStepConfig(@PathParam("jobName") @Parameter(description = "jobName") final String jobName,
@@ -94,7 +94,7 @@ public class ConfigureBusinessStepApiResource {
     @GET
     @Path("{jobName}/available-steps")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Business Step Configurations for a Job", description = "Returns the available Business Steps for a job")
+    @Operation(summary = "List Business Step Configurations for a Job", tags = {"Business Step Configuration"}, description = "Returns the available Business Steps for a job")
     public JobBusinessStepDetail retrieveAllAvailableBusinessStep(
             @PathParam("jobName") @Parameter(description = "jobName") final String jobName) {
         return configJobParameterService.getAvailableBusinessStepsByJobName(jobName);
