@@ -87,7 +87,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("health")
-    @Operation(summary = "Query Interoperation Health Request", description = "")
+    @Operation(summary = "Query Interoperation Health Request", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK")
     public String health(@Context UriInfo uriInfo) {
         return "OK";
@@ -96,7 +96,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("accounts/{accountId}")
-    @Operation(summary = "Query Interoperation Account details", description = "")
+    @Operation(summary = "Query Interoperation Account details", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropAccountData.class)))
     public String getAccountDetails(@PathParam("accountId") @Parameter(description = "accountId") String accountId,
             @Context UriInfo uriInfo) {
@@ -109,7 +109,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("accounts/{accountId}/transactions")
-    @Operation(summary = "Query transactions by Account Id", description = "")
+    @Operation(summary = "Query transactions by Account Id", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropTransactionsData.class)))
     public String getAccountTransactions(@PathParam("accountId") @Parameter(description = "accountId") String accountId,
             @DefaultValue("true") @QueryParam("debit") @Parameter(description = "debit") boolean debit,
@@ -131,7 +131,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("accounts/{accountId}/identifiers")
-    @Operation(summary = "Query Interoperation secondary identifiers by Account Id", description = "")
+    @Operation(summary = "Query Interoperation secondary identifiers by Account Id", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifiersResponseData.class)))
     public String getAccountIdentifiers(@PathParam("accountId") @Parameter(description = "accountId") String accountId,
             @Context UriInfo uriInfo) {
@@ -144,7 +144,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}")
-    @Operation(summary = "Query Interoperation Account by secondary identifier", description = "")
+    @Operation(summary = "Query Interoperation Account by secondary identifier", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String getAccountByIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
             @PathParam("idValue") @Parameter(description = "idValue") String idValue, @Context UriInfo uriInfo) {
@@ -157,7 +157,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}/{subIdOrType}")
-    @Operation(summary = "Query Interoperation Account by secondary identifier", description = "")
+    @Operation(summary = "Query Interoperation Account by secondary identifier", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String getAccountByIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
             @PathParam("idValue") @Parameter(description = "idValue") String idValue,
@@ -172,7 +172,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}")
-    @Operation(summary = "Interoperation Identifier registration", description = "")
+    @Operation(summary = "Interoperation Identifier registration", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropIdentifierRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String registerAccountIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
@@ -192,7 +192,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}/{subIdOrType}")
-    @Operation(summary = "Interoperation Identifier registration", description = "")
+    @Operation(summary = "Interoperation Identifier registration", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropIdentifierRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String registerAccountIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
@@ -212,7 +212,7 @@ public class InteropApiResource {
     @DELETE
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}")
-    @Operation(summary = "Allow Interoperation Identifier registration", description = "")
+    @Operation(summary = "Allow Interoperation Identifier registration", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropIdentifierRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String deleteAccountIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
@@ -229,7 +229,7 @@ public class InteropApiResource {
     @DELETE
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("parties/{idType}/{idValue}/{subIdOrType}")
-    @Operation(summary = "Allow Interoperation Identifier registration", description = "")
+    @Operation(summary = "Allow Interoperation Identifier registration", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropIdentifierRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropIdentifierAccountResponseData.class)))
     public String deleteAccountIdentifier(@PathParam("idType") @Parameter(description = "idType") InteropIdentifierType idType,
@@ -247,7 +247,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transactions/{transactionCode}/requests/{requestCode}")
-    @Operation(summary = "Query Interoperation Transaction Request", description = "")
+    @Operation(summary = "Query Interoperation Transaction Request", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropTransactionRequestResponseData.class)))
     public String getTransactionRequest(@PathParam("transactionCode") @Parameter(description = "transactionCode") String transactionCode,
             @PathParam("requestCode") @Parameter(description = "requestCode") String requestCode, @Context UriInfo uriInfo) {
@@ -263,7 +263,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("requests")
-    @Operation(summary = "Allow Interoperation Transaction Request", description = "")
+    @Operation(summary = "Allow Interoperation Transaction Request", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropTransactionRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropTransactionRequestResponseData.class)))
     public String createTransactionRequest(@Parameter(hidden = true) String quotesJson, @Context UriInfo uriInfo) {
@@ -279,7 +279,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transactions/{transactionCode}/quotes/{quoteCode}")
-    @Operation(summary = "Query Interoperation Quote", description = "")
+    @Operation(summary = "Query Interoperation Quote", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropQuoteResponseData.class)))
     public String getQuote(@PathParam("transactionCode") @Parameter(description = "transactionCode") String transactionCode,
             @PathParam("quoteCode") @Parameter(description = "quoteCode") String quoteCode, @Context UriInfo uriInfo) {
@@ -295,7 +295,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("quotes")
-    @Operation(summary = "Calculate Interoperation Quote", description = "")
+    @Operation(summary = "Calculate Interoperation Quote", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropQuoteRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropQuoteResponseData.class)))
     public String createQuote(@Parameter(hidden = true) String quotesJson, @Context UriInfo uriInfo) {
@@ -310,7 +310,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transactions/{transactionCode}/transfers/{transferCode}")
-    @Operation(summary = "Query Interoperation Transfer", description = "")
+    @Operation(summary = "Query Interoperation Transfer", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropTransferResponseData.class)))
     public String getTransfer(@PathParam("transactionCode") @Parameter(description = "transactionCode") String transactionCode,
             @PathParam("transferCode") @Parameter(description = "transferCode") String transferCode, @Context UriInfo uriInfo) {
@@ -326,7 +326,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transfers")
-    @Operation(summary = "Prepare Interoperation Transfer", description = "")
+    @Operation(summary = "Prepare Interoperation Transfer", tags = {"Inter Operation"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = InteropTransferRequestData.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropTransferResponseData.class)))
     public String performTransfer(@QueryParam("action") @Parameter(description = "action") String action,
@@ -354,7 +354,7 @@ public class InteropApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("accounts/{accountId}/kyc")
-    @Operation(summary = "Query KYC by Account Id", description = "")
+    @Operation(summary = "Query KYC by Account Id", tags = {"Inter Operation"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = InteropKycResponseData.class)))
     public String getClientKyc(@PathParam("accountId") @Parameter(description = "accountId") String accountId, @Context UriInfo uriInfo) {
         InteropKycResponseData result = interopService.getKyc(accountId);
@@ -367,7 +367,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transactions/{accountId}/disburse")
-    @Operation(summary = "Disburse Loan by Account Id", description = "")
+    @Operation(summary = "Disburse Loan by Account Id", tags = {"Inter Operation"}, description = "")
     public String disburseLoan(@PathParam("accountId") @Parameter(description = "accountId") String accountId,
             @Parameter(hidden = true) final String apiRequestBodyAsJson, @Context UriInfo uriInfo) {
         return interopService.disburseLoan(accountId, apiRequestBodyAsJson);
@@ -377,7 +377,7 @@ public class InteropApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("transactions/{accountId}/loanrepayment")
-    @Operation(summary = "Disburse Loan by Account Id", description = "")
+    @Operation(summary = "Disburse Loan by Account Id", tags = {"Inter Operation"}, description = "")
     public String loanRepayment(@PathParam("accountId") @Parameter(description = "accountId") String accountId,
             @Parameter(hidden = true) final String apiRequestBodyAsJson, @Context UriInfo uriInfo) {
         return interopService.loanRepayment(accountId, apiRequestBodyAsJson);
