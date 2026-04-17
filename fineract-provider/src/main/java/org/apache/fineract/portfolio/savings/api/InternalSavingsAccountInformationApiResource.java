@@ -18,6 +18,8 @@
  */
 package org.apache.fineract.portfolio.savings.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -36,6 +38,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+@Tag(name = "Internal Savings Account Information", description = "Internal savings account resources for testing")
 @Profile(FineractProfiles.TEST)
 @Component
 @Path("/v1/internal/savingsaccounts")
@@ -63,6 +66,7 @@ public class InternalSavingsAccountInformationApiResource implements Initializin
     @Path("status/{statusId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Retrieve internal savings account details", tags = {"Internal Savings Account Information"})
     public List<Long> getSavingsAccountsByStatus(@Context final UriInfo uriInfo, @PathParam("statusId") Integer statusId) {
         log.warn("------------------------------------------------------------");
         log.warn("                                                            ");
