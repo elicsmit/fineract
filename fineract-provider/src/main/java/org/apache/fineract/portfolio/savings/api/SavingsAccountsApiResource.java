@@ -98,7 +98,7 @@ public class SavingsAccountsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Savings Account Template", operationId = "retrieveSavingsAccountTemplate", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
+    @Operation(summary = "Retrieve Savings Account Template", operationId = "retrieveSavingsAccountTemplate", tags = {"Savings Account"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
             + "\n" + "Field Defaults\n" + "Allowed Value Lists\n\n" + "Example Requests:\n" + "\n" + "savingsaccounts/template?clientId=1\n"
             + "\n" + "\n" + "savingsaccounts/template?clientId=1&productId=1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SavingsAccountsApiResourceSwagger.GetSavingsAccountsTemplateResponse.class)))
@@ -119,7 +119,7 @@ public class SavingsAccountsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List savings applications/accounts", operationId = "retrieveAllSavingsAccounts", description = "Lists savings applications/accounts\n\n"
+    @Operation(summary = "List savings applications/accounts", operationId = "retrieveAllSavingsAccounts", tags = {"Savings Account"},  description = "Lists savings applications/accounts\n\n"
             + "Example Requests:\n" + "\n" + "savingsaccounts\n" + "\n" + "\n" + "savingsaccounts?fields=name")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SavingsAccountsApiResourceSwagger.GetSavingsAccountsResponse.class)))
     public String retrieveAll(@Context final UriInfo uriInfo,
@@ -147,7 +147,7 @@ public class SavingsAccountsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Submit new savings application", operationId = "submitSavingsApplication", description = "Submits new savings application\n\n"
+    @Operation(summary = "Submit new savings application", operationId = "submitSavingsApplication", tags = {"Savings Account"},  description = "Submits new savings application\n\n"
             + "Mandatory Fields: clientId or groupId, productId, submittedOnDate\n\n"
             + "Optional Fields: accountNo, externalId, fieldOfficerId\n\n"
             + "Inherited from Product (if not provided): nominalAnnualInterestRate, interestCompoundingPeriodType, interestCalculationType, interestCalculationDaysInYearType, minRequiredOpeningBalance, lockinPeriodFrequency, lockinPeriodFrequencyType, withdrawalFeeForTransfers, allowOverdraft, overdraftLimit, withHoldTax\n\n"
@@ -167,6 +167,7 @@ public class SavingsAccountsApiResource {
     @Path("/gsim")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Submit GSIM Application", tags = {"Savings Account"}, description = "Submits a new GSIM application")
     public String submitGSIMApplication(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createGSIMAccount().withJson(apiRequestBodyAsJson).build();
@@ -179,7 +180,7 @@ public class SavingsAccountsApiResource {
     @GET
     @Path("{accountId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a savings account", operationId = "retrieveSavingsAccount")
+    @Operation(summary = "Retrieve a savings account", tags = {"Savings Account"},  operationId = "retrieveSavingsAccount")
     public SavingsAccountData retrieveOne(@PathParam("accountId") final Long accountId,
             @DefaultValue("false") @QueryParam("staffInSelectedOfficeOnly") final boolean staffInSelectedOfficeOnly,
             @DefaultValue("all") @QueryParam("chargeStatus") final String chargeStatus,
@@ -191,7 +192,7 @@ public class SavingsAccountsApiResource {
     @GET
     @Path("/external-id/{externalId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a savings account by external ID", operationId = "retrieveSavingsAccountByExternalId")
+    @Operation(summary = "Retrieve a savings account by external ID", tags = {"Savings Account"}, operationId = "retrieveSavingsAccountByExternalId")
     public SavingsAccountData retrieveOne(@PathParam("externalId") final String externalId,
             @DefaultValue("false") @QueryParam("staffInSelectedOfficeOnly") final boolean staffInSelectedOfficeOnly,
             @DefaultValue("all") @QueryParam("chargeStatus") final String chargeStatus,
@@ -204,7 +205,7 @@ public class SavingsAccountsApiResource {
     @Path("{accountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Modify a savings application | Modify savings account withhold tax applicability", operationId = "updateSavingsAccount", description = "Modify a savings application:\n\n"
+    @Operation(summary = "Modify a savings application | Modify savings account withhold tax applicability", tags = {"Savings Account"},operationId = "updateSavingsAccount", description = "Modify a savings application:\n\n"
             + "Savings application can only be modified when in 'Submitted and pending approval' state. Once the application is approved, the details cannot be changed using this method. Specific api endpoints will be created to allow change of interest detail such as rate, compounding period, posting period etc\n\n"
             + "Modify savings account withhold tax applicability:\n\n"
             + "Savings application's withhold tax can be modified when in 'Active' state. Once the application is activated, can modify the account withhold tax to post tax or vice-versa"
@@ -222,7 +223,7 @@ public class SavingsAccountsApiResource {
     @Path("/external-id/{externalId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Modify a savings application | Modify savings account withhold tax applicability by externalId", operationId = "updateSavingsAccountByExternalId", description = "Modify a savings application by externalId:\n\n"
+    @Operation(tags = {"Savings Account"}, summary = "Modify a savings application | Modify savings account withhold tax applicability by externalId", operationId = "updateSavingsAccountByExternalId", description = "Modify a savings application by externalId:\n\n"
             + "Savings application can only be modified when in 'Submitted and pending approval' state. Once the application is approved, the details cannot be changed using this method. Specific api endpoints will be created to allow change of interest detail such as rate, compounding period, posting period etc\n\n"
             + "Modify savings account withhold tax applicability:\n\n"
             + "Savings application's withhold tax can be modified when in 'Active' state. Once the application is activated, can modify the account withhold tax to post tax or vice-versa"
@@ -240,6 +241,7 @@ public class SavingsAccountsApiResource {
     @Path("/gsim/{parentAccountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update GSIM Application", tags = {"Savings Account"}, description = "Updates a GSIM application")
     public String updateGsim(@PathParam("parentAccountId") final Long parentAccountId, final String apiRequestBodyAsJson) {
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateGSIMAccount(parentAccountId).withJson(apiRequestBodyAsJson)
                 .build();
@@ -253,6 +255,7 @@ public class SavingsAccountsApiResource {
     @Path("/gsimcommands/{parentAccountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Handle GSIM Commands", tags = {"Savings Account"}, description = "Executes specific commands on a GSIM account (e.g., approve, reject)")
     public String handleGSIMCommands(@PathParam("parentAccountId") final Long parentAccountId,
             @QueryParam("command") final String commandParam, final String apiRequestBodyAsJson) {
 
@@ -308,7 +311,7 @@ public class SavingsAccountsApiResource {
     @Path("{accountId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Approve savings application | Undo approval savings application | Assign Savings Officer | Unassign Savings Officer | Reject savings application | Withdraw savings application | Activate a savings account | Close a savings account | Calculate Interest on Savings Account | Post Interest on Savings Account | Block Savings Account | Unblock Savings Account | Block Savings Account Credit transactions | Unblock Savings Account Credit transactions | Block Savings Account Debit transactions | Unblock Savings Account debit transactions", description = "Approve savings application:\n\n"
+    @Operation(tags = {"Savings Account"}, summary = "Approve savings application | Undo approval savings application | Assign Savings Officer | Unassign Savings Officer | Reject savings application | Withdraw savings application | Activate a savings account | Close a savings account | Calculate Interest on Savings Account | Post Interest on Savings Account | Block Savings Account | Unblock Savings Account | Block Savings Account Credit transactions | Unblock Savings Account Credit transactions | Block Savings Account Debit transactions | Unblock Savings Account debit transactions", description = "Approve savings application:\n\n"
             + "Approves savings application so long as its in 'Submitted and pending approval' state.\n\n"
             + "Undo approval savings application:\n\n"
             + "Will move 'approved' savings application back to 'Submitted and pending approval' state.\n\n" + "Assign Savings Officer:\n\n"
@@ -353,7 +356,7 @@ public class SavingsAccountsApiResource {
     @Path("/external-id/{externalId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Approve savings application | Undo approval savings application | Assign Savings Officer | Unassign Savings Officer | Reject savings application | Withdraw savings application | Activate a savings account | Close a savings account | Calculate Interest on Savings Account | Post Interest on Savings Account | Block Savings Account | Unblock Savings Account | Block Savings Account Credit transactions | Unblock Savings Account Credit transactions | Block Savings Account Debit transactions | Unblock Savings Account debit transactions", description = "Approve savings application:\n\n"
+    @Operation(tags = {"Savings Account"}, summary = "Approve savings application | Undo approval savings application | Assign Savings Officer | Unassign Savings Officer | Reject savings application | Withdraw savings application | Activate a savings account | Close a savings account | Calculate Interest on Savings Account | Post Interest on Savings Account | Block Savings Account | Unblock Savings Account | Block Savings Account Credit transactions | Unblock Savings Account Credit transactions | Block Savings Account Debit transactions | Unblock Savings Account debit transactions", description = "Approve savings application:\n\n"
             + "Approves savings application so long as its in 'Submitted and pending approval' state.\n\n"
             + "Undo approval savings application:\n\n"
             + "Will move 'approved' savings application back to 'Submitted and pending approval' state.\n\n" + "Assign Savings Officer:\n\n"
@@ -401,7 +404,7 @@ public class SavingsAccountsApiResource {
     @DELETE
     @Path("{accountId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a savings application", operationId = "deleteSavingsAccount", description = "At present we support hard delete of savings application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the savings account.")
+    @Operation(summary = "Delete a savings application", operationId = "deleteSavingsAccount", tags = {"Savings Account"}, description = "At present we support hard delete of savings application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the savings account.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SavingsAccountsApiResourceSwagger.DeleteSavingsAccountsAccountIdResponse.class)))
     public String delete(@PathParam("accountId") @Parameter(description = "accountId") final Long accountId) {
 
@@ -411,7 +414,7 @@ public class SavingsAccountsApiResource {
     @DELETE
     @Path("/external-id/{externalId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a savings application by externalId", operationId = "deleteSavingsAccountByExternalId", description = "At present we support hard delete of savings application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the savings account.")
+    @Operation(summary = "Delete a savings application by externalId", tags = {"Savings Account"}, operationId = "deleteSavingsAccountByExternalId", description = "At present we support hard delete of savings application so long as its in 'Submitted and pending approval' state. One the application is moves past this state, it is not possible to do a 'hard' delete of the application or the account. An API endpoint will be added to close/de-activate the savings account.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = SavingsAccountsApiResourceSwagger.DeleteSavingsAccountsAccountIdResponse.class)))
     public String delete(@PathParam("externalId") @Parameter(description = "externalId") final String externalId) {
 
@@ -421,6 +424,7 @@ public class SavingsAccountsApiResource {
     @GET
     @Path("downloadtemplate")
     @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download Savings Account Template", tags = {"Savings Account"}, description = "Returns a template for bulk savings account import in Excel format")
     public Response getSavingsTemplate(@QueryParam("officeId") final Long officeId, @QueryParam("staffId") final Long staffId,
             @QueryParam("dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.SAVINGS_ACCOUNT.toString(), officeId, staffId, dateFormat);
@@ -431,6 +435,7 @@ public class SavingsAccountsApiResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RequestBody(description = "Upload savings template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = UploadRequest.class)) })
+    @Operation(summary = "Upload Savings Account Template", tags = {"Savings Account"}, description = "Uploads a savings account template for processing")
     public String postSavingsTemplate(@FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail, @FormDataParam("locale") final String locale,
             @FormDataParam("dateFormat") final String dateFormat) {
@@ -442,6 +447,7 @@ public class SavingsAccountsApiResource {
     @GET
     @Path("transactions/downloadtemplate")
     @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download savings transaction template", description = "Downloads an Excel template for bulk savings transaction imports based on office ID and date format.", tags = {"Savings Account"})
     public Response getSavingsTransactionTemplate(@QueryParam("officeId") final Long officeId,
             @QueryParam("dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.SAVINGS_TRANSACTIONS.toString(), officeId, null, dateFormat);
@@ -452,6 +458,8 @@ public class SavingsAccountsApiResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RequestBody(description = "Upload savings transaction template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = UploadRequest.class)) })
+    @Operation(summary = "Upload savings transaction template", description = "Uploads a filled Excel template to process multiple savings transactions simultaneously.", tags = {"Savings Account"}
+)
     public String postSavingsTransactionTemplate(@FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail, @FormDataParam("locale") final String locale,
             @FormDataParam("dateFormat") final String dateFormat) {
