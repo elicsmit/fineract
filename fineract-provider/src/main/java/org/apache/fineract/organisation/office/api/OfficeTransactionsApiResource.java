@@ -48,6 +48,7 @@ import org.springframework.stereotype.Component;
 @Path("/v1/officetransactions")
 @Component
 @RequiredArgsConstructor
+@Tag(name = "Office Transactions", description = "Endpoints for managing money transfers between different bank offices.") 
 public class OfficeTransactionsApiResource {
 
     private static final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(
@@ -64,6 +65,7 @@ public class OfficeTransactionsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "List office transactions", description = "Returns a list of all office-to-office transactions (inter-office transfers).", tags = {"Office Transactions"})
     public String retrieveOfficeTransactions(@Context final UriInfo uriInfo) {
 
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_READ_PERMISSIONS);
@@ -77,6 +79,7 @@ public class OfficeTransactionsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve office transaction template", description = "Returns a template for creating a new office transaction, including list of offices and available currencies.", tags = {"Office Transactions"})
     public String newOfficeTransactionDetails(@Context final UriInfo uriInfo) {
 
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_READ_PERMISSIONS);
@@ -90,6 +93,7 @@ public class OfficeTransactionsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Transfer money from one office to another", description = "Creates a new office-to-office transaction to transfer money.", tags = {"Office Transactions"})
     public String transferMoneyFrom(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createOfficeTransaction().withJson(apiRequestBodyAsJson).build();
@@ -102,6 +106,7 @@ public class OfficeTransactionsApiResource {
     @DELETE
     @Path("{transactionId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Delete an office transaction", description = "Deletes a specific office-to-office transfer transaction by its ID.", tags = {"Office Transactions"})
     public String delete(@PathParam("transactionId") final Long transactionId) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteOfficeTransaction(transactionId).build();
