@@ -56,7 +56,7 @@ public class SearchApiResource {
 
     @GET
     @Path("/template")
-    @Operation(summary = "Retrive Adhoc Search query template", description = """
+    @Operation(summary = "Retrive Adhoc Search query template", tags = {"Search API"}, description = """
             Mandatory Fields
 
             search?query=000000001
@@ -67,7 +67,7 @@ public class SearchApiResource {
     }
 
     @GET
-    @Operation(summary = "Search Resources", description = """
+    @Operation(summary = "Search Resources", tags = {"Search API"}, description = """
             Example Requests:
 
             search?query=000000001
@@ -92,7 +92,7 @@ public class SearchApiResource {
     @POST
     @Path("/advance")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Adhoc query search", description = """
+    @Operation(summary = "Adhoc query search", tags = {"Search API"}, description = """
             AdHocQuery search has more search options, it is a POST request, \
             it uses request body to send search parameters
 
