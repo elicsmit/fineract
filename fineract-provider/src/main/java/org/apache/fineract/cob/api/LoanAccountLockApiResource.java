@@ -42,7 +42,7 @@ public class LoanAccountLockApiResource {
     @GET
     @Path("locked")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List locked loan accounts", description = "Returns the locked loan IDs")
+    @Operation(summary = "List locked loan accounts", tags = {"Loan Account Lock"}, description = "Returns the locked loan IDs")
     public LoanAccountLockResponseDTO retrieveLockedAccounts(@QueryParam("page") Integer pageParam,
             @QueryParam("limit") Integer limitParam) {
         int page = Objects.requireNonNullElse(pageParam, 0);
