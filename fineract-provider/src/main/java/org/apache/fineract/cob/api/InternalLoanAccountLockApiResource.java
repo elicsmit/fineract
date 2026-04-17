@@ -18,8 +18,10 @@
  */
 package org.apache.fineract.cob.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.ws.rs.Consumes;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -47,6 +49,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Path("/v1/internal/loans")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Internal Loan Account Lock", description = "Internal API for managing loan account locks for testing purposes")
 public class InternalLoanAccountLockApiResource implements InitializingBean {
 
     private final LoanAccountLockRepository loanAccountLockRepository;
@@ -69,6 +72,7 @@ public class InternalLoanAccountLockApiResource implements InitializingBean {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @SuppressFBWarnings("SLF4J_SIGN_ONLY_FORMAT")
+    @Operation(summary = "Place a lock on a loan account", description = "Manually places a lock on a specific loan account for a given owner. For internal testing only.", tags = {"Internal Loan Account Lock"})
     public Response placeLockOnLoanAccount(@Context final UriInfo uriInfo, @PathParam("loanId") Long loanId,
             @PathParam("lockOwner") String lockOwner, @RequestBody(required = false) LockRequest request) {
         log.warn("------------------------------------------------------------");
