@@ -114,7 +114,7 @@ public class FixedDepositProductsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a Fixed Deposit Product", operationId = "createFixedDepositProduct", description = """
+    @Operation(summary = "Create a Fixed Deposit Product", operationId = "createFixedDepositProduct", tags = {"Fixed Deposit Product"}, description = """
             Creates a Fixed Deposit Product
 
             Mandatory Fields: name, shortName, description, currencyCode, digitsAfterDecimal,inMultiplesOf, interestCompoundingPeriodType, interestCalculationType, interestCalculationDaysInYearType, minDepositTerm, minDepositTermTypeId, accountingRule
@@ -139,7 +139,7 @@ public class FixedDepositProductsApiResource {
     @Path("{productId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Fixed Deposit Product", operationId = "updateFixedDepositProduct", description = "Updates a Fixed Deposit Product")
+    @Operation(summary = "Update a Fixed Deposit Product", operationId = "updateFixedDepositProduct", tags = {"Fixed Deposit Product"}, description = "Updates a Fixed Deposit Product")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = FixedDepositProductsApiResourceSwagger.PutFixedDepositProductsProductIdRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FixedDepositProductsApiResourceSwagger.PutFixedDepositProductsProductIdResponse.class)))
     public String update(@PathParam("productId") @Parameter(description = "productId") final Long productId,
@@ -156,7 +156,7 @@ public class FixedDepositProductsApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Fixed Deposit Products", operationId = "retrieveAllFixedDepositProducts", description = """
+    @Operation(summary = "List Fixed Deposit Products", operationId = "retrieveAllFixedDepositProducts", tags = {"Fixed Deposit Product"}, description = """
             Lists Fixed Deposit Products
 
             Example Requests:
@@ -182,7 +182,7 @@ public class FixedDepositProductsApiResource {
     @GET
     @Path("{productId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a Fixed Deposit Product", operationId = "retrieveOneFixedDepositProduct", description = """
+    @Operation(summary = "Retrieve a Fixed Deposit Product", operationId = "retrieveOneFixedDepositProduct", tags = {"Fixed Deposit Product"}, description = """
             Retrieves a Fixed Deposit Product
 
             Example Requests:
@@ -235,7 +235,7 @@ public class FixedDepositProductsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Fixed Deposit Product Template", operationId = "retrieveTemplateFixedDepositProduct")
+    @Operation(summary = "Retrieve Fixed Deposit Product Template", tags = {"Fixed Deposit Product"}, operationId = "retrieveTemplateFixedDepositProduct")
     public String retrieveTemplate(@Context final UriInfo uriInfo) {
 
         this.context.authenticatedUser().validateHasReadPermission(DepositsApiConstants.FIXED_DEPOSIT_PRODUCT_RESOURCE_NAME);
@@ -335,7 +335,7 @@ public class FixedDepositProductsApiResource {
     @DELETE
     @Path("{productId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a Fixed Deposit Product", operationId = "deleteFixedDepositProduct", description = "Deletes a Fixed Deposit Product")
+    @Operation(summary = "Delete a Fixed Deposit Product", operationId = "deleteFixedDepositProduct", tags = {"Fixed Deposit Product"}, description = "Deletes a Fixed Deposit Product")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = FixedDepositProductsApiResourceSwagger.DeleteFixedDepositProductsProductIdResponse.class)))
     public String delete(@PathParam("productId") @Parameter(description = "productId") final Long productId) {
 
