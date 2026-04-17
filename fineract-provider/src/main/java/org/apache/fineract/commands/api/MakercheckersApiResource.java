@@ -66,7 +66,7 @@ public class MakercheckersApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Maker Checker Entries", description = "Get a list of entries that can be checked by the requestor that match the criteria supplied.\n"
+    @Operation(summary = "List Maker Checker Entries", tags = {"Maker Checker (or 4-eye) functionality"}, description = "Get a list of entries that can be checked by the requestor that match the criteria supplied.\n"
             + "\n" + "Example Requests:\n" + "\n" + "makercheckers\n" + "\n" + "makercheckers?fields=madeOnDate,maker,processingResult\n"
             + "\n" + "makercheckers?makerDateTimeFrom=2013-03-25 08:00:00&makerDateTimeTo=2013-04-04 18:00:00\n" + "\n"
             + "makercheckers?officeId=1\n" + "\n" + "makercheckers?officeId=1&includeJson=true")
@@ -81,7 +81,7 @@ public class MakercheckersApiResource {
     @GET
     @Path("/searchtemplate")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Maker Checker Search Template", description = "This is a convenience resource. It can be useful when building a Checker Inbox UI. \"appUsers\" are data scoped to the office/branch the requestor is associated with. \"actionNames\" and \"entityNames\" returned are those that the requestor has Checker approval permissions for.\n"
+    @Operation(summary = "Maker Checker Search Template", tags = {"Maker Checker (or 4-eye) functionality"}, description = "This is a convenience resource. It can be useful when building a Checker Inbox UI. \"appUsers\" are data scoped to the office/branch the requestor is associated with. \"actionNames\" and \"entityNames\" returned are those that the requestor has Checker approval permissions for.\n"
             + "\n" + "Example Requests:\n" + "\n" + "makercheckers/searchtemplate\n" + "makercheckers/searchtemplate?fields=entityNames")
     public AuditSearchData retrieveAuditSearchTemplate() {
         return readPlatformService.retrieveSearchTemplate("makerchecker");
@@ -91,7 +91,7 @@ public class MakercheckersApiResource {
     @Path("{auditId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Approve Maker Checker Entry | Reject Maker Checker Entry")
+    @Operation(tags = {"Maker Checker (or 4-eye) functionality"}, summary = "Approve Maker Checker Entry | Reject Maker Checker Entry")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = MakercheckersApiResourceSwagger.PostMakerCheckersResponse.class)))
     public CommandProcessingResult approveMakerCheckerEntry(@PathParam("auditId") @Parameter(description = "auditId") final Long auditId,
             @QueryParam("command") @Parameter(description = "command") final String commandParam) {
@@ -115,7 +115,7 @@ public class MakercheckersApiResource {
     @DELETE
     @Path("{auditId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete Maker Checker Entry")
+    @Operation(tags = {"Maker Checker (or 4-eye) functionality"}, summary = "Delete Maker Checker Entry")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = MakercheckersApiResourceSwagger.PostMakerCheckersResponse.class)))
     public CommandProcessingResult deleteMakerCheckerEntry(@PathParam("auditId") @Parameter(description = "auditId") final Long auditId) {
         final Long id = writePlatformService.deleteEntry(auditId);
