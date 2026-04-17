@@ -49,7 +49,7 @@ public class WorkingCapitalLoanCOBCatchUpApiResource {
     @GET
     @Path("oldest-cob-closed")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieves the oldest COB processed Working Capital Loan", description = "Retrieves the COB business date and the oldest COB processed loan")
+    @Operation(summary = "Retrieves the oldest COB processed Working Capital Loan", tags = {"Working Capital Loan COB Catch Up"}, description = "Retrieves the COB business date and the oldest COB processed loan")
     public OldestCOBProcessedLoanDTO getOldestCOBProcessedLoan() {
         return loanCOBCatchUpServiceOp.map(COBCatchUpService::getOldestCOBProcessedLoan)
                 .orElseThrow(() -> new JobIsNotFoundOrNotEnabledException(JobName.LOAN_COB.name()));
@@ -59,7 +59,7 @@ public class WorkingCapitalLoanCOBCatchUpApiResource {
     @Path("catch-up")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Executes Working Capital Loan COB Catch Up", description = "Executes the Working Capital Loan COB job on every day from the oldest Loan to the current COB business date")
+    @Operation(summary = "Executes Working Capital Loan COB Catch Up", tags = {"Working Capital Loan COB Catch Up"}, description = "Executes the Working Capital Loan COB job on every day from the oldest Loan to the current COB business date")
     @ApiResponse(responseCode = "200", description = "All loans are up to date")
     @ApiResponse(responseCode = "202", description = "Catch Up has been started")
     @ApiResponse(responseCode = "400", description = "Catch Up is already running")
@@ -71,7 +71,7 @@ public class WorkingCapitalLoanCOBCatchUpApiResource {
     @GET
     @Path("is-catch-up-running")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieves whether Working Capital Loan COB catch up is running", description = "Retrieves whether Working Capital Loan COB catch up is running, and the current execution date if it is running.")
+    @Operation(summary = "Retrieves whether Working Capital Loan COB catch up is running", tags = {"Working Capital Loan COB Catch Up"}, description = "Retrieves whether Working Capital Loan COB catch up is running, and the current execution date if it is running.")
     public IsCatchUpRunningDTO isCatchUpRunning() {
         return loanCOBCatchUpServiceOp.map(COBCatchUpService::isCatchUpRunning).orElseGet(() -> new IsCatchUpRunningDTO(false, null));
     }
