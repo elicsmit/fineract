@@ -86,6 +86,7 @@ public class InternalCOBApiResource implements InitializingBean {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("partitions/{partitionSize}")
+    @Operation(summary = "Get COB partitions", description = "Retrieves loan COB partitions based on the business date and partition size. For internal testing purposes only.", tags = {"Internal COB"})
     public String getCobPartitions(@Context final UriInfo uriInfo, @PathParam("partitionSize") int partitionSize) {
         LocalDate businessDate = ThreadLocalContextUtil.getBusinessDateByType(BusinessDateType.BUSINESS_DATE);
         log.info("RetrieveLoanCOBPartitions is called with partitionSize {} for {}", partitionSize, businessDate);
@@ -98,6 +99,7 @@ public class InternalCOBApiResource implements InitializingBean {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Path("fast-forward-cob-date-of-loan/{loanId}")
+    @Operation(summary = "Fast forward COB date of loan", description = "Manually updates the last closed business date for a specific loan. For internal testing only.", tags = {"Internal COB"})
     public void updateLoanCobLastDate(@Context final UriInfo uriInfo, @PathParam("loanId") long loanId, String jsonBody) {
         JsonElement root = JsonParser.parseString(jsonBody);
         String lastClosedBusinessDate = root.getAsJsonObject().get("lastClosedBusinessDate").getAsString();
@@ -111,6 +113,7 @@ public class InternalCOBApiResource implements InitializingBean {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Path("loan-reprocess/{loanId}")
     @Transactional
+    @Operation(summary = "Reprocess loan schedule", description = "Regenerates the loan schedule by reprocessing transactions for a specific loan. For internal testing only.", tags = {"Internal COB"})
     public void loanReprocess(@Context final UriInfo uriInfo, @PathParam("loanId") long loanId) {
         loanScheduleService.regenerateScheduleWithReprocessingTransactions(loanRepositoryWrapper.findOneWithNotFoundDetection(loanId));
     }
