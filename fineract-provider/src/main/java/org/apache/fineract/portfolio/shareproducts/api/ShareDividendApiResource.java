@@ -66,7 +66,7 @@ public class ShareDividendApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List all share dividends", operationId = "retrieveAllShareDividends")
+    @Operation(summary = "List all share dividends", tags = {"Self Dividend"}, operationId = "retrieveAllShareDividends")
     public String retrieveAll(@PathParam("productId") final Long productId, @QueryParam("offset") final Integer offset,
             @QueryParam("limit") final Integer limit, @QueryParam("orderBy") final String orderBy,
             @QueryParam("sortOrder") final String sortOrder, @QueryParam("status") final Integer status) {
@@ -84,7 +84,7 @@ public class ShareDividendApiResource {
     @GET
     @Path("{dividendId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve a share dividend", operationId = "retrieveOneShareDividend")
+    @Operation(summary = "Retrieve a share dividend", tags = {"Self Dividend"}, operationId = "retrieveOneShareDividend")
     public String retrieveDividendDetails(@PathParam("dividendId") final Long dividendId, @QueryParam("offset") final Integer offset,
             @QueryParam("limit") final Integer limit, @QueryParam("orderBy") final String orderBy,
             @QueryParam("sortOrder") final String sortOrder, @QueryParam("accountNo") final String accountNo,
@@ -104,7 +104,7 @@ public class ShareDividendApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a share dividend", operationId = "createShareDividend")
+    @Operation(summary = "Create a share dividend", tags = {"Self Dividend"}, operationId = "createShareDividend")
     public String createDividendDetail(@PathParam("productId") final Long productId, final String apiRequestBodyAsJson) {
         this.platformSecurityContext.authenticatedUser();
         CommandWrapper commandWrapper = new CommandWrapperBuilder().createShareProductDividendPayoutCommand(productId)
@@ -117,7 +117,7 @@ public class ShareDividendApiResource {
     @Path("{dividendId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a share dividend", operationId = "updateShareDividend")
+    @Operation(summary = "Update a share dividend", tags = {"Self Dividend"}, operationId = "updateShareDividend")
     public String updateDividendDetail(@PathParam("productId") final Long productId, @PathParam("dividendId") final Long dividendId,
             @QueryParam("command") final String commandParam, final String apiRequestBodyAsJson) {
         CommandWrapper commandWrapper;
@@ -135,7 +135,7 @@ public class ShareDividendApiResource {
     @DELETE
     @Path("{dividendId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Delete a share dividend", operationId = "deleteShareDividend")
+    @Operation(summary = "Delete a share dividend", tags = {"Self Dividend"}, operationId = "deleteShareDividend")
     public String deleteDividendDetail(@PathParam("productId") final Long productId, @PathParam("dividendId") final Long dividendId) {
         this.platformSecurityContext.authenticatedUser();
         final CommandWrapper commandWrapper = new CommandWrapperBuilder().deleteShareProductDividendPayoutCommand(productId, dividendId)
