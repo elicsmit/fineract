@@ -76,7 +76,7 @@ public class StaffApiResource {
     private final CommandDispatcher dispatcher;
 
     @GET
-    @Operation(summary = "Retrieve Staff", operationId = "retrieveAllStaff", description = """
+    @Operation(summary = "Retrieve Staff", operationId = "retrieveAllStaff", tags = {"Staff"}, description = """
             Returns the list of staff members.
 
             Example Requests:
@@ -99,7 +99,7 @@ public class StaffApiResource {
 
     @GET
     @Path("{staffId}")
-    @Operation(summary = "Retrieve a Staff Member", operationId = "retrieveOneStaff", description = """
+    @Operation(summary = "Retrieve a Staff Member", operationId = "retrieveOneStaff", tags = {"Staff"}, description = """
             Returns the details of a Staff Member.
 
             Example Requests:
@@ -125,7 +125,7 @@ public class StaffApiResource {
     @GET
     @Path("downloadtemplate")
     @Produces("application/vnd.ms-excel")
-    @Operation(summary = "Download bulk import template")
+    @Operation(summary = "Download bulk import template", tags = {"Staff"})
     public Response getTemplate(@QueryParam("officeId") @Parameter(description = "officeId") final Long officeId,
             @QueryParam("dateFormat") @Parameter(description = "dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.STAFF.toString(), officeId, null, dateFormat);
@@ -133,7 +133,7 @@ public class StaffApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create a staff member", operationId = "createStaff", description = """
+    @Operation(summary = "Create a staff member", operationId = "createStaff", tags = {"Staff"}, description = """
             Creates a staff member.
 
             Mandatory fields:
@@ -160,7 +160,7 @@ public class StaffApiResource {
     @PUT
     @Path("{staffId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Staff Member", description = "Updates the details of a staff member.")
+    @Operation(summary = "Update a Staff Member", tags = {"Staff"}, description = "Updates the details of a staff member.")
     public StaffUpdateResponse updateStaff(@PathParam("staffId") @Parameter(description = "staffId") final Long staffId,
             @RequestBody(required = true) @Valid StaffUpdateRequest request) {
         request.setId(staffId);
@@ -180,6 +180,7 @@ public class StaffApiResource {
     @Produces({ MediaType.WILDCARD })
     @RequestBody(description = "Upload staff template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = StaffUploadRequest.class)) })
+    @Operation(summary = "Upload staff template", description = "Uploads a filled Excel template to create multiple staff members in bulk.", tags = {"Staff"})
     public Long postTemplate(@FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail, @FormDataParam("locale") final String locale,
             @FormDataParam("dateFormat") final String dateFormat) {
