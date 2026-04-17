@@ -91,7 +91,7 @@ public class TemplatesApiResource {
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
 
     @GET
-    @Operation(summary = "Retrieve all UGDs", description = "Example Requests:\n" + "\n" + "templates\n" + "\n"
+    @Operation(summary = "Retrieve all UGDs", tags = {"User Generated Documents"}, description = "Example Requests:\n" + "\n" + "templates\n" + "\n"
             + "It is also possible to get specific UGDs by entity and type:\n" + "\n" + "templates?type=0&entity=0\n"
             + "[Entity: Id]\n\n\n\n" + "\n\n" + "client: 0, loan: 1" + "\n\n" + "[Type: Id]\n\n\n\n"
             + "Document: 0, E-Mail (not yet): 1,  SMS: 2")
@@ -118,7 +118,7 @@ public class TemplatesApiResource {
 
     @GET
     @Path(PARAM_TEMPLATE)
-    @Operation(summary = "Retrieve UGD Details Template", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for UGDs. The UGD data returned consists of any or all of:\n"
+    @Operation(summary = "Retrieve UGD Details Template", tags = {"User Generated Documents"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for UGDs. The UGD data returned consists of any or all of:\n"
             + "\n" + "ARGUMENTS\n" + "name String entity String type String text String optional mappers Mapper optional\n"
             + "Example Request:\n" + "\n" + "templates/template")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.GetTemplatesTemplateResponse.class)))
@@ -134,7 +134,7 @@ public class TemplatesApiResource {
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Add a UGD", description = "Adds a new UGD.\n" + "\n" + "Mandatory Fields\n" + "name\n\n\n\n"
+    @Operation(summary = "Add a UGD", tags = {"User Generated Documents"}, description = "Adds a new UGD.\n" + "\n" + "Mandatory Fields\n" + "name\n\n\n\n"
             + "Example Requests:\n" + "\n" + "templates/1")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.PostTemplatesRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.PostTemplatesResponse.class)))
@@ -148,7 +148,7 @@ public class TemplatesApiResource {
 
     @GET
     @Path("{templateId}")
-    @Operation(summary = "Retrieve a UGD", description = "Example Requests:\n" + "\n" + "templates/1")
+    @Operation(summary = "Retrieve a UGD", tags = {"User Generated Documents"}, description = "Example Requests:\n" + "\n" + "templates/1")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.GetTemplatesTemplateIdResponse.class)))
     public String retrieveOne(@PathParam("templateId") @Parameter(description = "templateId") final Long templateId,
             @Context final UriInfo uriInfo) {
@@ -163,6 +163,7 @@ public class TemplatesApiResource {
 
     @GET
     @Path("{templateId}/template")
+    @Operation(summary = "Retrieve a UGD template", description = "Returns the template details for a specific user generated document.", tags = {"User Generated Documents"})
     public String getTemplateByTemplate(@PathParam("templateId") final Long templateId, @Context final UriInfo uriInfo) {
 
         this.context.authenticatedUser().validateHasReadPermission(RESOURCE_NAME_FOR_PERMISSION);
@@ -176,7 +177,7 @@ public class TemplatesApiResource {
     @PUT
     @Path("{templateId}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a UGD", description = "")
+    @Operation(summary = "Update a UGD", tags = {"User Generated Documents"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.PutTemplatesTemplateIdRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.PutTemplatesTemplateIdResponse.class)))
     public String saveTemplate(@PathParam("templateId") @Parameter(description = "templateId") final Long templateId,
@@ -191,7 +192,7 @@ public class TemplatesApiResource {
 
     @DELETE
     @Path("{templateId}")
-    @Operation(summary = "Delete a UGD", description = "")
+    @Operation(summary = "Delete a UGD", tags = {"User Generated Documents"}, description = "")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TemplatesApiResourcesSwagger.DeleteTemplatesTemplateIdResponse.class)))
     public String deleteTemplate(@PathParam("templateId") @Parameter(description = "templateId") final Long templateId) {
 
@@ -206,6 +207,7 @@ public class TemplatesApiResource {
     @Path("{templateId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.TEXT_HTML })
+    @Operation(summary = "Merge a UGD template", description = "Merges a specific user generated document template with provided data to generate a document.", tags = {"User Generated Documents"})
     public String mergeTemplate(@PathParam("templateId") final Long templateId, @Context final UriInfo uriInfo,
             final String apiRequestBodyAsJson) throws IOException {
 
