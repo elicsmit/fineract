@@ -54,7 +54,7 @@ public class WorkingDaysApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Working days", description = "Example Requests:\n" + "\n" + "workingdays")
+    @Operation(summary = "List Working days", tags = {"Working days"}, description = "Example Requests:\n" + "\n" + "workingdays")
     public WorkingDaysData retrieveAll() {
         return this.workingDaysReadPlatformService.retrieve();
     }
@@ -62,7 +62,7 @@ public class WorkingDaysApiResource {
     @PUT
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update a Working Day", description = "Mandatory Fields\n"
+    @Operation(summary = "Update a Working Day", tags = {"Working days"}, description = "Mandatory Fields\n"
             + "recurrence,repaymentRescheduleType,extendTermForDailyRepayments,locale")
     public WorkingDaysUpdateResponse update(@Valid WorkingDaysUpdateRequest request) {
 
@@ -80,7 +80,7 @@ public class WorkingDaysApiResource {
     @GET
     @Path("/template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Working Days Template", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for working days.\n"
+    @Operation(summary = "Working Days Template", tags = {"Working days"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for working days.\n"
             + "\n" + "Example Request:\n" + "\n" + "workingdays/template")
     public WorkingDaysData template() {
         return this.workingDaysReadPlatformService.repaymentRescheduleType();
