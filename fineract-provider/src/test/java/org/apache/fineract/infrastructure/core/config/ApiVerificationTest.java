@@ -18,7 +18,10 @@
  */
 package org.apache.fineract.infrastructure.core.config;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.ws.rs.Path;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.fineract.AbstractSpringTest;
