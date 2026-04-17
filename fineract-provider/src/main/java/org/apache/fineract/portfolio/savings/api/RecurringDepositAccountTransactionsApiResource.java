@@ -86,7 +86,7 @@ public class RecurringDepositAccountTransactionsApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Recurring Deposit Account Transaction Template", operationId = "retrieveTemplateRecurringDepositAccountTransaction", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
+    @Operation(summary = "Retrieve Recurring Deposit Account Transaction Template", operationId = "retrieveTemplateRecurringDepositAccountTransaction", tags = {"Recurring Deposit Account Transactions"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
             + "\n" + "Field Defaults\n" + "Allowed Value Lists\n" + "Example Requests:\n" + "\n"
             + "recurringdepositaccounts/1/transactions/template?command=deposit\n" + "\n"
             + "recurringdepositaccounts/1/transactions/template?command=withdrawal")
@@ -129,7 +129,7 @@ public class RecurringDepositAccountTransactionsApiResource {
     @GET
     @Path("{transactionId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Recurring Deposit Account Transaction", operationId = "retrieveOneRecurringDepositAccountTransaction", description = "Retrieves Recurring Deposit Account Transaction\n\n"
+    @Operation(summary = "Retrieve Recurring Deposit Account Transaction", operationId = "retrieveOneRecurringDepositAccountTransaction",  tags = {"Recurring Deposit Account Transactions"}, description = "Retrieves Recurring Deposit Account Transaction\n\n"
             + "Example Requests:\n" + "\n" + "recurringdepositaccounts/1/transactions/1")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = RecurringDepositAccountTransactionsApiResourceSwagger.GetRecurringDepositAccountsRecurringDepositAccountIdTransactionsTransactionIdResponse.class))) })
@@ -153,7 +153,7 @@ public class RecurringDepositAccountTransactionsApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Deposit Transaction | Withdrawal Transaction", operationId = "transactionRecurringDepositAccountTransaction", description = "Deposit Transaction:\n\n"
+    @Operation(summary = "Deposit Transaction | Withdrawal Transaction", operationId = "transactionRecurringDepositAccountTransaction", tags = {"Recurring Deposit Account Transactions"}, description = "Deposit Transaction:\n\n"
             + "Used for a deposit transaction\n\n" + "Withdrawal Transaction:\n\n" + "Used for a Withdrawal Transaction\n\n"
             + "Showing request/response for Deposit Transaction")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = RecurringDepositAccountTransactionsApiResourceSwagger.PostRecurringDepositAccountsRecurringDepositAccountIdTransactionsRequest.class)))
@@ -188,7 +188,7 @@ public class RecurringDepositAccountTransactionsApiResource {
     @Path("{transactionId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Adjust Transaction | Undo transaction", description = "Adjust Transaction:\n\n"
+    @Operation(summary = "Adjust Transaction | Undo transaction",  tags = {"Recurring Deposit Account Transactions"}, description = "Adjust Transaction:\n\n"
             + "This command modifies the given transaction.\n\n" + "Undo transaction:\n\n"
             + "This command reverses the given transaction.\n\n" + "Showing request/response for 'Adjust Transaction'")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = RecurringDepositAccountTransactionsApiResourceSwagger.PostRecurringDepositAccountsRecurringDepositAccountIdTransactionsRequest.class)))
