@@ -96,7 +96,7 @@ public class OfficesApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "List Offices", description = "Example Requests:\n" + "\n" + "offices\n" + "\n" + "\n"
+    @Operation(summary = "List Offices", tags = {"Offices"}, description = "Example Requests:\n" + "\n" + "offices\n" + "\n" + "\n"
             + "offices?fields=id,name,openingDate")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = OfficesApiResourceSwagger.GetOfficesResponse.class))))
     public String retrieveOffices(@Context final UriInfo uriInfo,
@@ -116,7 +116,7 @@ public class OfficesApiResource {
     @GET
     @Path("template")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve Office Details Template", description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
+    @Operation(summary = "Retrieve Office Details Template", tags = {"Offices"}, description = "This is a convenience resource. It can be useful when building maintenance user interface screens for client applications. The template data returned consists of any or all of:\n"
             + "\n" + "Field Defaults\n" + "Allowed description Lists\n" + "Example Request:\n" + "\n" + "offices/template")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.GetOfficesTemplateResponse.class)))
     public String retrieveOfficeTemplate(@Context final UriInfo uriInfo) {
@@ -131,7 +131,7 @@ public class OfficesApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Create an Office", description = "Mandatory Fields\n" + "name, openingDate, parentId")
+    @Operation(summary = "Create an Office", tags = {"Offices"}, description = "Mandatory Fields\n" + "name, openingDate, parentId")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.PostOfficesRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.PostOfficesResponse.class)))
     public String createOffice(@Parameter(hidden = true) final String apiRequestBodyAsJson) {
@@ -146,7 +146,7 @@ public class OfficesApiResource {
     @GET
     @Path("{officeId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve an Office", description = "Example Requests:\n" + "\n" + "offices/1\n" + "\n" + "\n"
+    @Operation(summary = "Retrieve an Office", tags = {"Offices"}, description = "Example Requests:\n" + "\n" + "offices/1\n" + "\n" + "\n"
             + "offices/1?template=true\n" + "\n" + "\n" + "offices/1?fields=id,name,parentName")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.GetOfficesResponse.class)))
     public String retrieveOffice(@PathParam("officeId") @Parameter(description = "officeId") final Long officeId,
@@ -164,7 +164,7 @@ public class OfficesApiResource {
     @GET
     @Path("/external-id/{externalId}")
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Retrieve an Office using external id", description = "Example Requests:\n" + "\n" + "offices/external-id/asd123\n"
+    @Operation(summary = "Retrieve an Office using external id", tags = {"Offices"}, description = "Example Requests:\n" + "\n" + "offices/external-id/asd123\n"
             + "\n" + "\n" + "offices/external-id/asd123?template=true\n" + "\n" + "\n"
             + "offices/external-id/asd123?fields=id,name,parentName")
     public OfficesApiResourceSwagger.GetOfficesResponse retrieveOfficeByExternalId(
@@ -183,7 +183,7 @@ public class OfficesApiResource {
     @Path("{officeId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Office", description = "")
+    @Operation(summary = "Update Office", tags = {"Offices"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.PutOfficesOfficeIdRequest.class)))
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.PutOfficesOfficeIdResponse.class)))
     public String updateOffice(@PathParam("officeId") @Parameter(description = "officeId") final Long officeId,
@@ -200,7 +200,7 @@ public class OfficesApiResource {
     @Path("/external-id/{externalId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    @Operation(summary = "Update Office", description = "")
+    @Operation(summary = "Update Office", tags = {"Offices"}, description = "")
     @RequestBody(required = true, content = @Content(schema = @Schema(implementation = OfficesApiResourceSwagger.PutOfficesOfficeIdRequest.class)))
     public OfficesApiResourceSwagger.PutOfficesOfficeIdResponse updateOfficeWithExternalId(
             @Parameter(description = "externalId") @PathParam("externalId") final String externalId,
@@ -217,6 +217,7 @@ public class OfficesApiResource {
     @GET
     @Path("downloadtemplate")
     @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download office template", description = "Returns an Excel template for bulk importing offices.", tags = {"Offices"})
     public Response getOfficeTemplate(@QueryParam("dateFormat") final String dateFormat) {
         return bulkImportWorkbookPopulatorService.getTemplate(GlobalEntityType.OFFICES.toString(), null, null, dateFormat);
     }
@@ -226,6 +227,7 @@ public class OfficesApiResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RequestBody(description = "Upload office template", content = {
             @Content(mediaType = MediaType.MULTIPART_FORM_DATA, schema = @Schema(implementation = UploadRequest.class)) })
+    @Operation(summary = "Upload office template", description = "Uploads a filled Excel template to create multiple offices in bulk.", tags = {"Offices"})
     public String postOfficeTemplate(@FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail, @FormDataParam("locale") final String locale,
             @FormDataParam("dateFormat") final String dateFormat) {
