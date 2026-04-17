@@ -64,6 +64,7 @@ public class AdHocApiResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve all AdHoc Queries", description = "Returns a list of all stored ad-hoc queries for custom reporting.", tags = {"AdHocQuery Api"})
     public List<AdHocData> retrieveAll() {
 
         this.context.authenticatedUser();
@@ -73,6 +74,7 @@ public class AdHocApiResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("template")
+    @Operation(summary = "Retrieve AdHoc Query Template", description = "Returns a template for creating a new ad-hoc query, including available tables and fields.", tags = {"AdHocQuery Api"})
     public AdHocData template() {
         this.context.authenticatedUser();
         return adHocReadPlatformService.retrieveNewAdHocDetails();
@@ -81,6 +83,7 @@ public class AdHocApiResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Create an AdHoc Query", description = "Creates a new ad-hoc query for custom reporting purposes.", tags = {"AdHocQuery Api"})
     public CommandProcessingResult createAdHocQuery(final AdHocRequest adHocRequest) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createAdHoc()
@@ -92,6 +95,7 @@ public class AdHocApiResource {
     @GET
     @Path("{adHocId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Retrieve an AdHoc Query", description = "Returns the details of a specific ad-hoc query by its ID.", tags = {"AdHocQuery Api"})
     public AdHocData retrieveAdHocQuery(@PathParam("adHocId") @Parameter(description = "adHocId") final Long adHocId) {
 
         this.context.authenticatedUser();
@@ -103,6 +107,7 @@ public class AdHocApiResource {
     @Path("{adHocId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Update an AdHoc Query", description = "Updates the details of an existing ad-hoc query.", tags = {"AdHocQuery Api"})
     public CommandProcessingResult update(@PathParam("adHocId") @Parameter(description = "adHocId") final Long adHocId,
             final AdHocRequest adHocRequest) {
 
@@ -121,6 +126,7 @@ public class AdHocApiResource {
     @DELETE
     @Path("{adHocId}")
     @Produces({ MediaType.APPLICATION_JSON })
+    @Operation(summary = "Delete an AdHoc Query", description = "Deletes a specific ad-hoc query by its ID.", tags = {"AdHocQuery Api"})
     public CommandProcessingResult deleteAdHocQuery(@PathParam("adHocId") @Parameter(description = "adHocId") final Long adHocId) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteAdHoc(adHocId).build();
