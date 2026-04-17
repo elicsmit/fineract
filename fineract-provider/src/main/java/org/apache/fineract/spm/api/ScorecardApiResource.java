@@ -65,7 +65,7 @@ public class ScorecardApiResource {
     @Path("{surveyId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
-    @Operation(summary = "List all Scorecard entries", description = "List all Scorecard entries for a survey.")
+    @Operation(summary = "List all Scorecard entries", tags = {"Score Card"}, description = "List all Scorecard entries for a survey.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Scorecard.class)))) })
     public List<ScorecardData> findBySurvey(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId) {
@@ -79,7 +79,7 @@ public class ScorecardApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
-    @Operation(summary = "Create a Scorecard entry", description = "Add a new entry to a survey.\n" + "\n" + "Mandatory Fields\n"
+    @Operation(summary = "Create a Scorecard entry", tags = {"Score Card"}, description = "Add a new entry to a survey.\n" + "\n" + "Mandatory Fields\n"
             + "clientId, createdOn, questionId, responseId, staffId")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "OK") })
     public void createScorecard(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId,
@@ -94,6 +94,7 @@ public class ScorecardApiResource {
     @Path("{surveyId}/clients/{clientId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
+    @Operation(summary = "Find Scorecard by Survey and Client", description = "Returns a list of scorecard entries for a specific survey and client.", tags = {"Score Card"})
     public List<ScorecardData> findBySurveyAndClient(@PathParam("surveyId") @Parameter(description = "Enter surveyId") final Long surveyId,
             @PathParam("clientId") @Parameter(description = "Enter clientId") final Long clientId) {
         this.securityContext.authenticatedUser();
@@ -107,6 +108,7 @@ public class ScorecardApiResource {
     @Path("clients/{clientId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Transactional
+    @Operation(summary = "Find Scorecard by Client", description = "Returns a list of scorecard entries for a specific client.", tags = {"Score Card"})
     public List<ScorecardData> findByClient(@PathParam("clientId") final Long clientId) {
         this.securityContext.authenticatedUser();
         this.clientRepositoryWrapper.findOneWithNotFoundDetection(clientId);
